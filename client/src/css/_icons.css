@@ -1,4 +1,13 @@
 .icon{
   height: 2.5rem;
   width: 2.5rem;
+  color:var(--darkie);
+}
+
+@media only screen and (max-width:48em) {
+
+  .icon{
+  height: 2rem;
+  width: 2rem;
+}
 }

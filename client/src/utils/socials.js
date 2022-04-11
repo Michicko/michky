@@ -4,15 +4,15 @@ import { AiFillGithub, AiOutlineTwitter } from "react-icons/ai";
 
 const socials = [
 	{
-		icon: <AiFillGithub />,
+		icon: <AiFillGithub className='icon header-icon' />,
 		link: "https://github.com/Michicko",
 	},
 	{
-		icon: <AiOutlineTwitter />,
-		link: "https://twitter.com/micky_oti",
+		icon: <AiOutlineTwitter className='icon header-icon' />,
+		link: "https://twitter.com/Michky__",
 	},
 	{
-		icon: <RiLinkedinFill />,
+		icon: <RiLinkedinFill className='icon header-icon' />,
 		link: "https://www.linkedin.com/in/solomon-michael-691873187/",
 	},
 ];
