@@ -7,6 +7,7 @@
 @import "_navigation.css";
 @import "_form.css";
 @import "_header.css";
+@import "_about.css";
 
 *,
 *::before,
@@ -25,6 +26,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Poppins', sans-serif;
+  background: var(--light-color);
+  
 }
 
 code {
