@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap');
+
+@import "_variables.css";
+@import "_typography.css";
+@import "_buttons.css";
+@import "_icons.css";
+@import "_navigation.css";
+@import "_form.css";
+@import "_header.css";
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
+}
+
+html{
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body { 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
