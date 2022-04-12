@@ -4,12 +4,14 @@
 @import "_typography.css";
 @import "_buttons.css";
 @import "_icons.css";
+@import "_utils.css";
 @import "_navigation.css";
 @import "_form.css";
 @import "_header.css";
 @import "_about.css";
 @import "_contact.css";
 @import "_projects.css";
+@import "_footer.css";
 
 
 *,

@@ -1,4 +1,5 @@
-import socials from '../utils/socials';
+import SocialIcons from "./SocialIcons"
+
 
 const Header = () => {
   return (
@@ -17,21 +18,7 @@ const Header = () => {
 					</div>
         </div>
         <div className="header-socials">
-          {socials.map((social, i) => {
-            const { link, icon } = social;
-            return (
-							<a
-								href={link}
-								target='_blank'
-								rel='noreferrer'
-								className='header-link'
-								key={i}
-							>
-								{icon}
-							</a>
-						);
-          })}
-          
+          <SocialIcons/>
         </div>
 			</div>
 		</div>

@@ -38,4 +38,9 @@
 	.nav {
 		padding: 0 2rem;
 	}
+
+	.nav-logo {
+	height: 2rem;
+	width: 2rem;
+}
 }
