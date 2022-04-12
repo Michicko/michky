@@ -1,6 +1,7 @@
 .icon{
-  height: 2.5rem;
-  width: 2.5rem;
+  display: block;
+  height: 2rem;
+  width: 2rem;
   color:var(--darkie);
 }
 

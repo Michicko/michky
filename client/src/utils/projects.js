@@ -5,13 +5,6 @@ module.exports = [
 			name: "tasty-time",
 			ext: "png",
 		},
-		technologies: [
-			"react",
-			"nodejs",
-			"express",
-			"mongoDb",
-			"styled-components",
-		],
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
@@ -23,13 +16,6 @@ module.exports = [
 			name: "tasty-time",
 			ext: "png",
 		},
-		technologies: [
-			"react",
-			"nodejs",
-			"express",
-			"mongoDb",
-			"styled-components",
-		],
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
@@ -41,13 +27,6 @@ module.exports = [
 			name: "tasty-time",
 			ext: "png",
 		},
-		technologies: [
-			"react",
-			"nodejs",
-			"express",
-			"mongoDb",
-			"styled-components",
-		],
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
@@ -59,13 +38,6 @@ module.exports = [
 			name: "tasty-time",
 			ext: "png",
 		},
-		technologies: [
-			"react",
-			"nodejs",
-			"express",
-			"mongoDb",
-			"styled-components",
-		],
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
