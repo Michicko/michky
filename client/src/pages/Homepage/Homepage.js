@@ -1,4 +1,5 @@
 import About from "../../components/About";
+import Contact from "../../components/Contact";
 import Header from "../../components/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import Projects from "../../components/Projects";
@@ -9,7 +10,8 @@ const Homepage = () => {
       <Navigation/>
 			<Header />
 			<About />
-			<Projects/>
+			<Projects />
+			<Contact/>
 		</>
 	);
 };
