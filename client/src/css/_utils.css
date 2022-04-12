@@ -1,0 +1,13 @@
+.socials{
+  height: 3rem;
+	display: flex;
+  align-items: center;
+}
+
+.socials > *:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.social-link, .social-link:hover,.social-link:visited{
+  text-decoration: none;
+}
