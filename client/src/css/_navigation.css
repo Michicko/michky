@@ -1,4 +1,4 @@
-.navbar {
+.navigation {
 	height: 6.5rem;
 	width: 100%;
 	position: fixed;
@@ -17,6 +17,23 @@
 	padding: 0 4rem;
 }
 
+.nav-bg{
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100vh;
+	width: 100%;
+	/* background: #000; */
+	z-index:20;
+}
+
+.nav-list{
+	position: absolute;
+	top: 0;
+	z-index: 25;
+	color: var(--light-color);
+}
+
 .nav-btn {
 	background: transparent;
 	border: none;
@@ -29,10 +46,6 @@
 	color: var(--dark-color);
 }
 
-.nav-logo {
-	height: 3rem;
-	width: 3rem;
-}
 
 @media only screen and (max-width: 30em) {
 	.nav {
