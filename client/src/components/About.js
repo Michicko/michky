@@ -3,7 +3,7 @@ import skills from '../utils/skills';
 const About = () => {
   return (
 		<>
-			<section className='about-section'>
+			<section className='about-section' id='about'>
 				<h1 className='primary-heading about-heading'>
 					<span className='main'>About</span>
 					<span className='sub'> Me</span>

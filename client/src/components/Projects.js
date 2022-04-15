@@ -3,7 +3,7 @@ import { FiExternalLink } from 'react-icons/fi';
 
 const Projects = () => {
 	return (
-		<section className='projects-section'>
+		<section className='projects-section' id='projects'>
 			<h1 className='primary-heading projects-heading'>
 				<span className='main'>My</span>
 				<span className='sub'> Works</span>
