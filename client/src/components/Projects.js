@@ -2,6 +2,7 @@ import projects from "../utils/projects";
 import { FiExternalLink } from 'react-icons/fi';
 
 const Projects = () => {
+
 	return (
 		<section className='projects-section' id='projects'>
 			<h1 className='primary-heading projects-heading'>
@@ -32,9 +33,7 @@ const Projects = () => {
 										<span>Visit</span>
 									</a>
 								</div>
-                <div className='img-box'>
-                  {/* project image goes here */}
-                </div>
+								<div className='img-box'>{/* project image goes here */}</div>
 							</li>
 						);
 					})}

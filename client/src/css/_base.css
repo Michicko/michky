@@ -3,6 +3,8 @@
 @import "_variables.css";
 @import "_typography.css";
 @import "_buttons.css";
+@import "_animations.css";
+@import "_loader.css";
 @import "_icons.css";
 @import "_utils.css";
 @import "_navigation.css";

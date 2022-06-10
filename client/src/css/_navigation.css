@@ -6,7 +6,7 @@
 	width: 100%;
 	position: fixed;
 	top: 0;
-	right: 0;
+	right: -10rem;
 	z-index: 1500;
 
 	opacity: 0;
@@ -131,6 +131,7 @@ border-radius: 50%;
 .navigation-checkbox:checked ~ .navigation-nav {
 	opacity: 1;
 	width: 100%;
+	right: 0;
 }
 
 .navigation-btn:hover .navigation-icon::before{
@@ -171,7 +172,7 @@ border-radius: 50%;
 	}
 
 	.navigation-btn {
-		right: 2rem;
+		right: 1.8rem;
 	}
 
 	.navigation-btn {
