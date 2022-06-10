@@ -7,13 +7,13 @@ import Projects from "../../components/Projects";
 
 const Homepage = () => {
 	return (
-    <>
-      <Navigation/>
+		<>
+			<Navigation />
 			<Header />
 			<About />
 			<Projects />
 			<Contact />
-			<Footer/>
+			<Footer />
 		</>
 	);
 };
