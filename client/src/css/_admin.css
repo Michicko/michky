@@ -1,0 +1,173 @@
+.topbar {
+	width: 100%;
+	height: 6rem;
+	position: fixed;
+	z-index: 200;
+	padding: 0 4rem;
+	background: var(--darkie);
+	display: flex;
+	align-items: center;
+}
+
+.page-container {
+	width: 100%;
+	min-height: calc(100vh - 6rem);
+	top: 6rem;
+	position: relative;
+	padding: 4rem 8rem;
+}
+
+.page-content {
+	margin-bottom: 4rem;
+	height: 30rem;
+	overflow-y: scroll;
+}
+
+.page-main{
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.admin-project {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.projects-box {
+	max-width: 740px;
+	margin: 0 auto;
+}
+
+.project-ctrls,
+.page-top {
+	display: flex;
+	align-items: center;
+}
+
+.page-top {
+	justify-content: space-between;
+	margin-bottom: 4rem;
+}
+
+.project-icon {
+	height: 2rem;
+	width: 2rem;
+	cursor: pointer;
+}
+
+.project-icon.edit {
+	color: var(--edit);
+}
+.project-icon.delete {
+	color: var(--delete);
+}
+
+.project-icon:first-child {
+	margin-right: 1rem;
+}
+
+.admin-projects > *:not(:last-child) {
+	margin-bottom: 2rem;
+}
+
+.admin-project {
+	padding: 1rem 0;
+}
+
+.admin-project .name {
+	font-size: 1.6rem;
+	color: var(--darkie);
+	font-weight: 500;
+}
+
+.fileUploadInput {
+	display: grid;
+	grid-gap: 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.fileUploadInput label {
+	display: flex;
+	align-items: center;
+	color: setColor(primary, 0.5);
+	background: setColor(white);
+	transition: 0.4s ease;
+	font-family: arial, sans-serif;
+	font-size: 1.2em;
+	font-weight: regular;
+}
+
+.fileUploadInput input {
+	position: relative;
+	z-index: 1;
+	padding: 0 gap(m);
+	width: 100%;
+	height: 50px;
+border: 1px solid rgba(0, 0, 0, 0.2);
+	/* border-radius: 3px; */
+	font-family: arial, sans-serif;
+	font-size: 1rem;
+	user-select: none;
+	cursor: pointer;
+	font-weight: regular;
+}
+.fileUploadInput input[type="file"] {
+	padding: 0 gap(m);
+}
+.fileUploadInput input[type="file"]::-webkit-file-upload-button {
+	visibility: hidden;
+	margin-left: 10px;
+	padding: 0;
+	height: 50px;
+	width: 0;
+}
+
+.fileUploadInput button {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 0;
+	user-select: none;
+	color: white;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+	background-color: var(--darkie);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.fileUploadInput button svg {
+	width: auto;
+	height: 50%;
+  margin-right: 0 !important;
+}
+
+
+
+@-moz-document url-prefix() {
+.fileUploadInput button{
+    display: none
+}
+}
+
+.img-view{
+  height: 25rem;
+  width: 100%;
+  position: relative;
+}
+
+.project-img-view{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.del-img{
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}

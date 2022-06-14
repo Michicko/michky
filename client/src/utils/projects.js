@@ -1,47 +1,55 @@
 module.exports = [
 	{
-		name: "tastyTime1",
+		_id: "bc2436bdg",
+		name: "Tasty time",
 		image: {
-			name: "tasty-time",
+			url: "https://cloudininay.com/michky/images/aa",
 			ext: "png",
 		},
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
 			"Tastytime is a restaurant app ecomeerce and everyother thing i know this because. I want to do this.\nHopefully people get this.",
+		slug: "tasty-time",
 	},
+
 	{
-		name: "tastyTime2",
+		_id: "bc2756bcg",
+		name: "Not less or equal",
 		image: {
-			name: "tasty-time",
+			url: "https://cloudininay.com/michky/images/aa",
 			ext: "png",
 		},
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
 			"Tastytime is a restaurant app ecomeerce and everyother thing i know this because. I want to do this.\nHopefully people get this.",
+		slug: "not-less-or-equal",
 	},
 	{
+		_id: "bd2456cdh",
 		name: "tastyTime3",
 		image: {
-			name: "tasty-time",
+			url: "https://cloudininay.com/michky/images/aa",
 			ext: "png",
 		},
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
 			"Tastytime is a restaurant app ecomeerce and everyother thing i know this because. I want to do this.\nHopefully people get this.",
+		slug: "tastyTime3",
 	},
 	{
+		_id: "bb2534edc",
 		name: "tastyTime4",
 		image: {
-			name: "tasty-time",
+			url: "https://cloudininay.com/michky/images/aa",
 			ext: "png",
 		},
 		link: "https://heroku.com/tastytime",
 		github: "github.com/tastytime",
 		description:
 			"Tastytime is a restaurant app ecomeerce and everyother thing i know this because. I want to do this.\nHopefully people get this.",
+		slug: "tastyTime4",
 	},
-	
 ];

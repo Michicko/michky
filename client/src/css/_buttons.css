@@ -1,0 +1,13 @@
+.btn{
+  text-decoration: none;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--light-color);
+  background: var(--darkie);
+  padding: 1rem 2rem;
+}
+
+.admin-form-btn{
+  min-width: 14rem;
+}

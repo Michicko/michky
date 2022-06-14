@@ -14,14 +14,13 @@ const projectSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "A project must have a link to view"],
 	},
-	// github: {
-	// 	type: String,
-	// 	required: [true, "A project must have a github repo link"],
-	// },
 	description: {
 		type: String,
 		required: [true, "A project must have a description"],
 	},
+	slug: {
+		type: String
+	}
 });
 
 const Project = mongoose.model("Project", projectSchema);

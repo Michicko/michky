@@ -1,12 +1,21 @@
 .footer {
 	width: 100%;
 	padding: 2rem 8rem 2rem 8rem;
-  
 }
 
 .footer-content  {
   border-top: 1px solid rgba(0, 0, 0, 0.4);
   padding-top: 1rem;
+  position: relative;
+}
+.footer-admin-btn{
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
 }
 
 .footer-socials, .footer-copy{
