@@ -11,12 +11,12 @@ const About = () => {
 				<div className='about-content'>
 					<div className='about-description'>
 						<p className='about-text'>
-							My name is Michael, i'm passionate about bringing ideas to reality through codes. I
+							Hi, i'm passionate about bringing ideas to reality through codes. I
 							create responsive websites that are fast, easy to use and built
 							with best practices.
 						</p>
 						<p className='about-text'>
-							I'm always working on improving my skills one code at a time.
+							I'm always working on improving my skills one code at a time. 
 						</p>
 						<p className='about-text'>
 							Interested in working together, feel free to contact me for any

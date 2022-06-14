@@ -1,11 +1,11 @@
 import { Link } from 'react-scroll';
 
 const NavLink = ({ navlink, setIsChecked, navCheck }) => {
-  
-  const handleSetActive = () => {
-    navCheck.current.checked = false;
-    setIsChecked(false);
-	};
+
+	const handleClick = (e) => {
+		setIsChecked(false);
+		navCheck.current.checked = false;
+	}
 
 	return (
 		<Link
@@ -16,7 +16,7 @@ const NavLink = ({ navlink, setIsChecked, navCheck }) => {
 			smooth={true}
       duration={1500}
       delay={100}
-			onSetActive={handleSetActive}
+			onClick={handleClick}
 		>
 			{navlink}
 		</Link>

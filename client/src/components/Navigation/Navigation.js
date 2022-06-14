@@ -45,8 +45,8 @@ const Navigation = () => {
 								<NavLink
 									navlink={navlink}
 									setIsChecked={setIsChecked}
-									navCheck
-									={navCheck}/>
+									navCheck={navCheck}
+								/>
 							</li>
 						);
 					})}

@@ -8,8 +8,6 @@
 margin-bottom: 2rem;
 }
 
-
-
 .form-text-input{
    width: 100%;
   padding: 1.5rem 1rem;
@@ -39,4 +37,8 @@ font-size: 1.5rem;
   font-weight: 500;
   text-transform: capitalize;
   cursor: pointer;
+}
+
+.project-form >*:not(:last-child){
+  margin-bottom: 2rem;
 }
