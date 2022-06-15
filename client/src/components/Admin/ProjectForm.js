@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
-const ProjectForm = ({ type, project, projects, setProjects }) => {
+const ProjectForm = ({
+	type,
+	project,
+	projects,
+	setProjects,
+	displayAlert
+}) => {
 	const [projectImage, setProjectImage] = useState("");
 	const createBtn = useRef(null);
 	const updateBtn = useRef(null);
@@ -14,6 +20,8 @@ const ProjectForm = ({ type, project, projects, setProjects }) => {
 		image: null,
 		description: "",
 	});
+
+
 
 	const handleOnchange = (e) => {
 		const name = e.target.name;
@@ -42,28 +50,37 @@ const ProjectForm = ({ type, project, projects, setProjects }) => {
 		setProjects(updatedProjects);
 	};
 
+	const createCustomMessage = (type) => {
+		let message = '';
+		if (type === 'create') {
+			message = "project created successfully.";
+		} else if (type === 'edit') {
+			message = 'project updated successfully'
+		}
+	}
+
 	const createProject = async (config) => {
 		try {
 			const res = await axios(config);
 			let project = null;
-			
+
 			if (res.data.status === "success") {
-				
 				// set success message
-				// activateAlert("success", "Product added successfully");
-				
+				clearForm();
+				createBtn.current.disabled = false;
+
 				project = res.data.data.project;
-				console.log(project)
+				console.log(project);
+				displayAlert(true, "success", 'project created successfully.');
 				updateDomProjects(project);
+				    
 			}
 		} catch (error) {
+			createBtn.current.disabled = false;
 			if (error.response) {
 				// The request was made and the server responded with a status code
 				// that falls out of the range of 2xx
-				console.log(error.message);
-				console.log(error.response.data);
-				console.log(error.response.status);
-				console.log(error.response.headers);
+				displayAlert(true, "error", error.response.data.message);
 			} else if (error.request) {
 				// The request was made but no response was received
 				// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -71,12 +88,9 @@ const ProjectForm = ({ type, project, projects, setProjects }) => {
 				console.log(error.request);
 			} else {
 				// Something happened in setting up the request that triggered an Error
-				console.log("Error", error.message);
+				displayAlert(true, "error", error.message);
 			}
 		}
-
-		clearForm();
-		createBtn.current.disabled = false;
 	};
 
 	// create config for axios request
@@ -91,11 +105,10 @@ const ProjectForm = ({ type, project, projects, setProjects }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData();
-		data.append('name', form.name);
-		data.append('link', form.link);
-		data.append('image', form.image);
-		data.append('description', form.description);
-
+		data.append("name", form.name);
+		data.append("link", form.link);
+		data.append("image", form.image);
+		data.append("description", form.description);
 
 		if (type === "create") {
 			const method = "POST";

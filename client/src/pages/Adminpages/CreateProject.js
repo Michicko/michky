@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import ProjectForm from "../../components/Admin/ProjectForm";
 import Topbar from "../../components/Admin/Topbar";
 
-const CreateProject = ({ projects, setProjects }) => {
+const CreateProject = ({
+	projects,
+	setProjects,
+	displayAlert
+}) => {
 	const [project, setProject] = useState({
 		name: "",
 		link: "",
@@ -27,6 +31,7 @@ const CreateProject = ({ projects, setProjects }) => {
 						project={project}
 						projects={projects}
 						setProjects={setProjects}
+						displayAlert={displayAlert}
 					/>
 				</main>
 			</div>

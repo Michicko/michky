@@ -8,7 +8,7 @@ const handleCastErrorDb = (err) => {
 const handleDuplicateKeyDb = (err) => {
 	const objKey = Object.keys(err.keyValue)[0];
 	const objVal = Object.values(err.keyValue)[0];
-	const message = `Duplicate ${objKey}: ${objVal}. Please use another ${objKey}.`;
+	const message = `Duplicate ${objKey}: "${objVal}". Please use another ${objKey}.`;
 	return new AppError(message, 400);
 };
 
@@ -31,6 +31,8 @@ const sendErrorDev = (err, res) => {
 const sendErrorProd = (err, res) => {
 	// Operational we trust
 	if (err.isOperational) {
+		console.log(err.status)
+		console.log(err.message);
 		res.status(err.statusCode).json({
 			status: err.status,
 			message: err.message,

@@ -7,8 +7,7 @@ const globalError = require("./controller/errorControllers");
 const app = express();
 
 // middlewares
-// if (process.env.NODE_ENV === 'production') {
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 
@@ -53,6 +52,5 @@ app.all("*", (req, res, next) => {
 
 // Handle error
 app.use(globalError);
-
 
 module.exports = app;

@@ -61,7 +61,7 @@
 	color: var(--edit);
 }
 .project-icon.delete {
-	color: var(--delete);
+	color: var(--danger);
 }
 
 .project-icon:first-child {
