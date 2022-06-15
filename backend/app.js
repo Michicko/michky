@@ -7,12 +7,23 @@ const globalError = require("./controller/errorControllers");
 const app = express();
 
 // middlewares
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(express.urlencoded({ extended: true, limit: "5mb" }));
-app.use(cors());
+// cors
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		credentials: true, //access-control-allow-credentials:true
+	})
+);
+
+// body parser, reading data from the body req.body
+// app.use(cookieParser());
+app.use(express.json({limit: '10kb'}));
+app.use(express.urlencoded({ extended: true }));
 
 // Routers
 const projectRouter = require('./routes/projectRoutes');

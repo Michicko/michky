@@ -29,15 +29,14 @@ const createObjData = (url, id) => {
 	};
 };
 
-exports.uploadImageToCloud = () =>
-	catchAsync(async (req, res, next) => {
-		const id = req.body.name;
-		const imagePath = req.files.image[0].path;
-		const result = await cloudinaryUploader(imagePath, id);
-		const data = createObjData(result.secure_url, result.public_id);
-		// asign image to req.body.image
-		req.body.image = data;
-		// remove temp image from disk
-		removeTempImg(imagePath);
-		next();
-	});
+exports.uploadImageToCloud = catchAsync(async (req, res, next) => {
+	const id = req.body.name;
+	const imagePath = req.file.path;
+	const result = await cloudinaryUploader(imagePath, id);
+	const data = createObjData(result.secure_url, result.public_id);
+	// asign image to req.body.image
+	req.body.image = data;
+	// remove temp image from disk
+	removeTempImg(imagePath);
+	next();
+});

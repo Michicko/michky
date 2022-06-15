@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import ProjectForm from "../../components/Admin/ProjectForm";
 import Topbar from "../../components/Admin/Topbar";
 
-
-const CreateProject = () => {
+const CreateProject = ({ projects, setProjects }) => {
 	const [project, setProject] = useState({
-		name: '',
-		link: '',
+		name: "",
+		link: "",
 		image: null,
-		description: ''
+		description: "",
 	});
 
 	return (
@@ -22,8 +21,13 @@ const CreateProject = () => {
 						Back to projects
 					</Link>
 				</div>
-				<main className="page-main">
-					<ProjectForm type='create' project={project}/>
+				<main className='page-main'>
+					<ProjectForm
+						type='create'
+						project={project}
+						projects={projects}
+						setProjects={setProjects}
+					/>
 				</main>
 			</div>
 		</div>

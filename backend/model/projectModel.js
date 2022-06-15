@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require('slugify');
 
 const projectSchema = new mongoose.Schema({
 	name: {
@@ -22,6 +23,12 @@ const projectSchema = new mongoose.Schema({
 		type: String
 	}
 });
+
+projectSchema.pre("save", function (next) {
+	this.slug = slugify(this.name);
+	next();
+});
+
 
 const Project = mongoose.model("Project", projectSchema);
 

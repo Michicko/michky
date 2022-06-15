@@ -37,7 +37,7 @@ function App() {
 					<Admin projects={projects} setProjects={setProjects} />
 				</Route>
 				<Route exact path='/admin/create-project'>
-					<CreateProject />
+					<CreateProject projects={projects} setProjects={setProjects} />
 				</Route>
 				<Route exact path='/admin/projects/:slug'>
 					<EditProject projects={projects} />

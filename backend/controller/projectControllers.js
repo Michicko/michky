@@ -15,12 +15,13 @@ exports.getProjects = catchAsync(async (req, res, next) => {
 });
 
 exports.createProject = catchAsync(async (req, res, next) => {
-	const { name, image, technologies, link, github, description } = req.body;
+	const { name, image, link, description, slug } = req.body;
 	const project = await Project.create({
 		name,
 		image,
 		link,
 		description,
+		slug
 	});
 
 	res.status(201).json({
@@ -30,6 +31,14 @@ exports.createProject = catchAsync(async (req, res, next) => {
 		},
 	});
 });
+
+exports.checkBody = catchAsync(async (req, res, next) => {
+	console.log('body: ',req.body)
+	console.log('files: ', req.files);
+	console.log('file: ', req.file )
+
+	next();
+})
 
 exports.updateProject = catchAsync(async (req, res, next) => {
 	const { id } = req.params;
