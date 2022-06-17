@@ -23,6 +23,18 @@ const AdminProject = ({ project, projects, setProjects, displayAlert }) => {
 		setProjects(tempProjects);
 	};
 
+	// delete image from cloudinary
+	const deleteImageFromCloud = async (cloudinary_id) => {
+		const config = createConfig(
+			"POST",
+			"http://127.0.0.1:8000/api/v1/projects/deleteimage",
+			{ public_id: cloudinary_id },
+			false
+		);
+
+		const res = await handleRequest(config);
+	};
+
 	// deleteProject
 	const deleteProject = async (project_id) => {
 		const config = createConfig(
@@ -32,6 +44,7 @@ const AdminProject = ({ project, projects, setProjects, displayAlert }) => {
 			false
 		);
 		const res = await handleRequest(config);
+		const res2 = await deleteImageFromCloud(project.image.cloudinary_id)
 		if (res) {
 			displayAlert(true, "success", "Project deleted successfully");
 			deleteDomProject(project_id);

@@ -76,6 +76,7 @@ const ProjectForm = ({
 			{ public_id: cloudinary_id },
 			false
 		);
+
 		const res = await handleRequest(config);
 		if (res) {
 			displayAlert(true, "success", "Image deleted successfully");
@@ -155,11 +156,9 @@ const ProjectForm = ({
 
 	// replace edited project on the dom
 	const updateProjectOnDom = (project) => {
-		console.log(projects);
 		const tempProjects = projects.filter((p) => p._id !== project._id);
 		const updatedProjects = [...tempProjects || [], project];
 		setProjects(updatedProjects);
-		console.log(updatedProjects)
 	}
 
 	// update project
@@ -180,7 +179,6 @@ const ProjectForm = ({
 		if (res) {
 			displayAlert(true, "success", "Project updated successfully");
 			const project = res.data.data.project;
-			console.log(res);
 			updateProjectOnDom(project);
 			setProjectImage(project.image);
 			updateBtn.current.disabled = false;
