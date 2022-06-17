@@ -44,7 +44,7 @@ exports.updateProject = catchAsync(async (req, res, next) => {
 	const { id } = req.params;
 	const project = await Project.findByIdAndUpdate(id, req.body, {
 		new: true,
-		runValidators: true,
+		// runValidators: true,
 	});
 
 	if (!project) {
@@ -72,3 +72,11 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 		data: null,
 	});
 });
+
+
+exports.getCloudinaryId = catchAsync(async (req, res, next) => {
+	const id = req.body.public_id;
+	console.log(req.body);
+	req.cloudinary_id = id;
+	next();
+})

@@ -2,12 +2,7 @@ import Topbar from "../../components/Admin/Topbar";
 import { Link } from "react-router-dom";
 import AdminProject from "../../components/Admin/AdminProject";
 
-const Admin = ({ projects, setProjects }) => {
-
-	const deleteProject = (_id) => {
-		const tempProjects = projects.filter((project) => project._id !== _id);
-		setProjects(tempProjects);
-	};
+const Admin = ({ projects, setProjects, displayAlert }) => {
 
 	return (
 		<div className='admin-page'>
@@ -29,7 +24,9 @@ const Admin = ({ projects, setProjects }) => {
 									<AdminProject
 										key={i}
 										project={project}
-										deleteProject={deleteProject}
+										projects={projects}
+										setProjects={setProjects}
+										displayAlert={displayAlert}
 									/>
 								);
 							})}

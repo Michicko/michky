@@ -8,6 +8,7 @@ import CreateProject from "./pages/Adminpages/CreateProject";
 import projs from "./utils/projects";
 import EditProject from "./pages/Adminpages/EditProject";
 import Portal from "./Portal";
+import axios from "axios";
 
 function App() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,8 +18,24 @@ function App() {
 	const [alertType, setAlertType] = useState("");
 	const [alertMessage, setAlertMessage] = useState("");
 
+	const getProjects = async () => {
+		try {
+			setIsLoading(true);
+			const res = await axios.get("http://127.0.0.1:8000/api/v1/projects");
+			let tempProjects = [];
+			if (res.data.status === "success") {
+				setIsLoading(false);
+				tempProjects = res.data.data.projects;
+				setProjects(tempProjects);
+			}
+		} catch (error) {
+			setIsLoading(false);
+			setIsError(true);
+			console.log(error);
+		}
+	};
 	useEffect(() => {
-		setProjects(projs);
+		getProjects();
 	}, []);
 
 	const displayAlert = (show, type, message) => {
@@ -30,7 +47,7 @@ function App() {
 	useEffect(() => {
 		const alertTime = setTimeout(() => {
 			setShowAlert(false);
-		}, 4000);
+		}, 5000);
 
 		return () => {
 			clearTimeout(alertTime);
@@ -59,10 +76,14 @@ function App() {
 			<Router>
 				<Switch>
 					<Route exact path='/'>
-						<Homepage setIsLoading={setIsLoading} />
+						<Homepage setIsLoading={setIsLoading} projects={projects} />
 					</Route>
 					<Route exact path='/admin'>
-						<Admin projects={projects} setProjects={setProjects} />
+						<Admin
+							projects={projects}
+							setProjects={setProjects}
+							displayAlert={displayAlert}
+						/>
 					</Route>
 					<Route exact path='/admin/create-project'>
 						<CreateProject
@@ -72,7 +93,11 @@ function App() {
 						/>
 					</Route>
 					<Route exact path='/admin/projects/:slug'>
-						<EditProject projects={projects} />
+						<EditProject
+							projects={projects}
+							setProjects={setProjects}
+							displayAlert={displayAlert}
+						/>
 					</Route>
 					<Route path='*'>
 						<Errorpage />

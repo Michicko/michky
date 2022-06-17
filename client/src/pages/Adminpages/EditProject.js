@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import ProjectForm from "../../components/Admin/ProjectForm";
 import Topbar from "../../components/Admin/Topbar";
 
-const EditProject = ({ projects }) => {
+const EditProject = ({ projects, setProjects,displayAlert }) => {
 	const { slug } = useParams();
 	const [title, setTitle] = useState("");
 	const [project, setProject] = useState(null);
@@ -33,7 +33,13 @@ const EditProject = ({ projects }) => {
 					</Link>
 				</div>
 				<main className='page-main'>
-					<ProjectForm type='edit' project={project} projects={projects} />
+					<ProjectForm
+						type='edit'
+						project={project}
+						projects={projects}
+						displayAlert={displayAlert}
+						setProjects={setProjects}
+					/>
 				</main>
 			</div>
 		</div>

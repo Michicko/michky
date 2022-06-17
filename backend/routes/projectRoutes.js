@@ -4,16 +4,39 @@ const {
 	updateProject,
 	deleteProject,
 	createProject,
+	getCloudinaryId,
+	checkBody,
 } = require("../controller/projectControllers");
 const { upload } = require("../utils/multer");
-const { uploadImageToCloud } = require("../utils/cloudinary");
+const { uploadImageToCloud, deleteCloudImage } = require("../utils/cloudinary");
+
 const router = express.Router();
 
 router
 	.route("/")
 	.get(getProjects)
-	.post(upload, uploadImageToCloud, createProject);
+	.post(createProject);
 
-router.route("/:id").patch(updateProject).delete(deleteProject);
+router
+	.route("/:id")
+	.patch(updateProject)
+	.delete(deleteProject);
+
+// router.route("/:id/updateImage").patch(updateProject);
+
+// router.route("/images/uploadImage").post(
+// 	upload,
+// 	checkBody
+// 	// uploadImageToCloud
+// );
+
+router.route('/uploadimage').post(
+	upload,
+	checkBody,
+	uploadImageToCloud
+	)
+
+router.route("/deleteimage").post(getCloudinaryId, deleteCloudImage);
+
 
 module.exports = router;

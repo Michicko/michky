@@ -35,8 +35,24 @@ exports.uploadImageToCloud = catchAsync(async (req, res, next) => {
 	const result = await cloudinaryUploader(imagePath, id);
 	const data = createObjData(result.secure_url, result.public_id);
 	// asign image to req.body.image
-	req.body.image = data;
+	// req.body.image = data;
 	// remove temp image from disk
 	removeTempImg(imagePath);
-	next();
+	// next();
+	res.status(201).json({
+		status: "success",
+		data,
+	});
+});
+
+exports.deleteCloudImage = catchAsync(async (req, res, next) => {
+	const id = req.cloudinary_id;
+	await cloudinary.uploader.destroy(id, function (error, result) {
+		console.log(result, error);
+	});
+
+	res.status(204).json({
+		status: "success",
+		data: null,
+	});
 });

@@ -21,12 +21,13 @@ app.use(
 
 // body parser, reading data from the body req.body
 // app.use(cookieParser());
-app.use(express.json({limit: '10kb'}));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routers
 const projectRouter = require('./routes/projectRoutes');
 const emailRouter = require('./routes/emailRoutes');
+
 
 // projects routes
 app.use('/api/v1/projects', projectRouter);

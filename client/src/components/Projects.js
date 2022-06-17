@@ -1,8 +1,5 @@
-import projects from "../utils/projects";
 import { FiExternalLink } from 'react-icons/fi';
-
-const Projects = () => {
-
+const Projects = ({projects}) => {
 	return (
 		<section className='projects-section' id='projects'>
 			<h1 className='primary-heading projects-heading'>
@@ -12,7 +9,7 @@ const Projects = () => {
 			<div className='projects-content'>
 				<ul className='projects'>
 					{projects.map((project, i) => {
-						const { name, image, link, github, description } = project;
+						const { name, image, link, description } = project;
 						return (
 							<li
 								className={
@@ -33,7 +30,15 @@ const Projects = () => {
 										<span>Visit</span>
 									</a>
 								</div>
-								<div className='img-box'>{/* project image goes here */}</div>
+								<div className='img-box'>
+									{project.image && (
+										<img
+											src={image.url}
+											alt={project.name}
+											className='project-img'
+										/>
+									)}
+								</div>
 							</li>
 						);
 					})}
