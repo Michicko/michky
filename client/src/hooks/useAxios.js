@@ -1,7 +1,8 @@
-import {useState, useEffect, useCallback} from 'react';
 import axios from "axios";
+import { useProjectsContext } from "../contexts/projects_context";
 
-const useAxios = (displayAlert) => {
+const useAxios = () => {
+	const {displayAlert} = useProjectsContext();
    
 	const handleRequest = async (config) => {
 		const content = config.multi
@@ -17,14 +18,14 @@ const useAxios = (displayAlert) => {
         return res;
       } catch (error) {
 				if (error.response) {
-					displayAlert(true, "error", error.response.data.message);
+					displayAlert("error", error.response.data.message);
 					console.log(error);
 				} else if (error.request) {
 					console.log(error.request);
 				} else {
 					console.log(error);
 					console.log("Error", error.message);
-					displayAlert(true, "error", error.message);
+					displayAlert("error", error.message);
 				}
 			}
 		};

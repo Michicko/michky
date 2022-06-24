@@ -5,13 +5,13 @@ import Header from "../../components/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import Projects from "../../components/Projects";
 
-const Homepage = ({projects}) => {
+const Homepage = () => {
 	return (
 		<>
 			<Navigation />
 			<Header />
 			<About />
-			<Projects projects={projects} />
+			<Projects />
 			<Contact />
 			<Footer />
 		</>

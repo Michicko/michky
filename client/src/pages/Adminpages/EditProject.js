@@ -2,26 +2,25 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProjectForm from "../../components/Admin/ProjectForm";
 import Topbar from "../../components/Admin/Topbar";
+import { useProjectsContext } from "../../contexts/projects_context";
 
-const EditProject = ({ projects, setProjects,displayAlert }) => {
+const EditProject = () => {
 	const { slug } = useParams();
 	const [title, setTitle] = useState("");
 	const [project, setProject] = useState(null);
+	const { projects } = useProjectsContext();
 
-	const findProject = useCallback(
-		(slug) => {
-			const tempProject = projects.find((p) => p.slug === slug);
-			if (tempProject) {
-				setProject(tempProject);
-				setTitle(tempProject.name);
-			}
-		},
-		[projects]
-	);
+	const findProject = useCallback((slug) => {
+		const tempProject = projects.find((p) => p.slug === slug);
+		if (tempProject) {
+			setProject(tempProject);
+			setTitle(tempProject.name);
+		}
+	}, [projects]);
 
 	useEffect(() => {
 		findProject(slug);
-	}, [slug, findProject]);
+	}, [slug, projects, findProject]);
 
 	return (
 		<div className='admin-page'>
@@ -33,13 +32,7 @@ const EditProject = ({ projects, setProjects,displayAlert }) => {
 					</Link>
 				</div>
 				<main className='page-main'>
-					<ProjectForm
-						type='edit'
-						project={project}
-						projects={projects}
-						displayAlert={displayAlert}
-						setProjects={setProjects}
-					/>
+					<ProjectForm type='edit' project={project} />
 				</main>
 			</div>
 		</div>

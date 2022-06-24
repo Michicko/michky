@@ -1,9 +1,19 @@
 import Topbar from "../../components/Admin/Topbar";
 import { Link } from "react-router-dom";
 import AdminProject from "../../components/Admin/AdminProject";
+import { useProjectsContext } from "../../contexts/projects_context";
 
-const Admin = ({ projects, setProjects, displayAlert }) => {
+const Admin = () => {
+	const { projects } = useProjectsContext();
 
+	const projectList =
+		projects.length > 0 ? (
+			projects.map((project, i) => {
+				return <AdminProject key={i} project={project} />;
+			})
+		) : (
+			<p className='nothing'>No projects available at the moment.</p>
+		);
 	return (
 		<div className='admin-page'>
 			<Topbar title='Projects' />
@@ -19,17 +29,7 @@ const Admin = ({ projects, setProjects, displayAlert }) => {
 				<div className='page-content'>
 					<div className='projects-box'>
 						<ul className='admin-projects'>
-							{projects.map((project, i) => {
-								return (
-									<AdminProject
-										key={i}
-										project={project}
-										projects={projects}
-										setProjects={setProjects}
-										displayAlert={displayAlert}
-									/>
-								);
-							})}
+							{projectList}
 						</ul>
 					</div>
 				</div>

@@ -36,7 +36,6 @@ exports.checkBody = catchAsync(async (req, res, next) => {
 	console.log('body: ',req.body)
 	console.log('files: ', req.files);
 	console.log('file: ', req.file )
-
 	next();
 })
 

@@ -1,205 +1,47 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
-import axios from "axios";
-import useAxios from "../../hooks/useAxios";
+import { useProjectsContext } from "../../contexts/projects_context";
 
 const ProjectForm = ({
 	type,
 	project,
-	projects,
-	setProjects,
-	displayAlert,
 }) => {
-	const [projectImage, setProjectImage] = useState(null);
 	const createBtn = useRef(null);
 	const updateBtn = useRef(null);
 	const formContainer = useRef(null);
-	const { handleRequest } = useAxios(displayAlert);
 	const [oldForm, setOldForm] = useState({});
 
-	const [form, setForm] = useState({
-		name: "",
-		link: "",
-		image: null,
-		description: "",
-	});
-
-	const clearForm = () => {
-		setForm({
-			name: "",
-			link: "",
-			image: null,
-			description: "",
-		});
-		formContainer.current.reset();
-	};
-
-	// create config for axios request
-	const createConfig = (method, url, data, multi) => {
-		return {
-			method: method,
-			url: url,
-			data,
-			multi,
-		};
-	};
-
-	const handleOnchange = (e) => {
-		const name = e.target.name;
-		let value = e.target.value;
-		if (name === "image") {
-			value = e.target.files[0];
-		}
-		setForm((values) => ({ ...values, [name]: value }));
-	};
-
-	// upload image to cloudinary
-	const uploadImage = async () => {
-		const config = createConfig(
-			"POST",
-			"http://127.0.0.1:8000/api/v1/projects/uploadimage",
-			{ name: form.name, image: form.image },
-			true
-		);
-		const res = await handleRequest(config);
-		if (res) {
-			displayAlert(true, "success", "Image uploaded successfully");
-			setProjectImage(res.data.data);
-		}
-	};
-
-	// delete image from cloudinary
-	const deleteImageFromCloud = async (cloudinary_id) => {
-		const config = createConfig(
-			"POST",
-			"http://127.0.0.1:8000/api/v1/projects/deleteimage",
-			{ public_id: cloudinary_id },
-			false
-		);
-
-		const res = await handleRequest(config);
-		if (res) {
-			displayAlert(true, "success", "Image deleted successfully");
-			setProjectImage(null);
-			deleteImageFromDom(cloudinary_id);
-		}
-	};
-
-	// delete image from project on the Dom
-	const deleteImageFromDom = (cloudinary_id) => {
-		projects.map((p) => {
-			if (p.image.cloudinary_id === cloudinary_id) {
-				p.image = null;
-			}
-			return p;
-		});
-	};
-
-	// update dom projects
-	const updateDomProjects = (project) => {
-		const updatedProjects = [...projects, project];
-		setProjects(updatedProjects);
-	};
-
-	// create new project
-	const createProject = async () => {
-		// disable btn
-		createBtn.current.disabled = true;
-		const config = createConfig(
-			"POST",
-			"http://127.0.0.1:8000/api/v1/projects",
-			{
-				name: form.name,
-				link: form.link,
-				image: projectImage,
-				description: form.description,
-			},
-			false
-		);
-		const res = await handleRequest(config);
-		if (res) {
-			displayAlert(true, "success", "Project added successfully");
-			const project = res.data.data.project;
-			updateDomProjects(project);
-			clearForm();
-			setProjectImage(null);
-			createBtn.current.disabled = false;
-		}
-	};
-
-	// return keys of object
-	const getObjKeys = (obj) => {
-		return Object.keys(obj);
-	};
-
-	// check if a value is an object
-	const isObject = (n) => {
-		return Object.prototype.toString.call(n) === "[object Object]";
-	};
-
-	// compare old and new form and create an update
-	const compareObj = (obj1, obj2, obj = Object.create(null)) => {
-		const obj1Keys = getObjKeys(obj1);
-
-		obj1Keys.forEach((key) => {
-			if (isObject(obj1) && isObject(obj2)) {
-				if (obj1[key] !== obj2[key]) {
-					obj[key] = obj2[key];
-				} else {
-					compareObj(obj1[key], obj2[key], obj);
-				}
-			}
-		});
-
-		return obj;
-	};
-
-	// replace edited project on the dom
-	const updateProjectOnDom = (project) => {
-		const tempProjects = projects.filter((p) => p._id !== project._id);
-		const updatedProjects = [...tempProjects || [], project];
-		setProjects(updatedProjects);
-	}
-
-	// update project
-	const updateProject = async (project_id) => {
-		const newForm = compareObj(oldForm, form);
-		const config = createConfig(
-			"PATCH",
-			`http://127.0.0.1:8000/api/v1/projects/${project_id}`,
-			{
-				name: newForm.name,
-				link: newForm.link,
-				image: projectImage,
-				description: newForm.description,
-			},
-			false
-		);
-		const res = await handleRequest(config);
-		if (res) {
-			displayAlert(true, "success", "Project updated successfully");
-			const project = res.data.data.project;
-			updateProjectOnDom(project);
-			setProjectImage(project.image);
-			updateBtn.current.disabled = false;
-		}
-	};
+	const {
+		handleOnchange,
+		updateProject,
+		setProjectImage,
+		projectImage,
+		form,
+		setForm,
+		uploadImage,
+		createProject,
+		deleteImageFromCloud,
+	} = useProjectsContext();
 
 	const handleSave = async (e) => {
 		e.preventDefault();
 		if (type === "create") {
-			await createProject();
-			// createBtn.current.disabled = true;
+			await createProject(formContainer.current, createBtn.current);
 		}
 	};
 
+	// update project
 	const handleUpdate = async (e) => {
 		e.preventDefault();
 		if (type === "edit") {
-			await updateProject(project._id);
-			// updateBtn.current.disabled = true;
+			await updateProject(project._id, oldForm, updateBtn.current);
+			updateBtn.current.disabled = true;
 		}
 	};
+
+	useEffect(() => {
+		console.log("project: ", project);
+	}, [project])
 
 	useEffect(() => {
 		if (type === "edit" && project) {
@@ -213,6 +55,7 @@ const ProjectForm = ({
 			setForm(tempForm);
 			setProjectImage(project.image);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type, project]);
 
 	return (
@@ -247,13 +90,13 @@ const ProjectForm = ({
 						{/* img */}
 						<img
 							src={projectImage.url}
-							alt={project.name}
+							alt={project && project.name}
 							className='project-img-view'
 						/>
 						{/* delete */}
 						<AiOutlineClose
 							className='project-icon del-img'
-							onClick={() => deleteImageFromCloud(projectImage.cloudinary_id)}
+							onClick={() => deleteImageFromCloud(projectImage.cloudinary_id, project._id)}
 						/>
 					</div>
 				)}
