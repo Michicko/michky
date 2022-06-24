@@ -8,6 +8,7 @@ import EditProject from "./pages/Adminpages/EditProject";
 import Portal from "./Portal";
 import { useProjectsContext } from "./contexts/projects_context";
 import Error from "./components/Error";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 function App() {
 	const { isLoading, isError, showAlert, alertType, alertMessage } =
@@ -18,9 +19,7 @@ function App() {
 	}
 
 	if (isError) {
-		return (
-			<Error/>
-		);
+		return <Error />;
 	}
 
 	return (
@@ -33,23 +32,25 @@ function App() {
 			</Portal>
 
 			<Router>
-				<Switch>
-					<Route exact path='/'>
-						<Homepage />
-					</Route>
-					<Route exact path='/admin'>
-						<Admin />
-					</Route>
-					<Route exact path='/admin/create-project'>
-						<CreateProject />
-					</Route>
-					<Route exact path='/admin/projects/:slug'>
-						<EditProject />
-					</Route>
-					<Route path='*'>
-						<Errorpage />
-					</Route>
-				</Switch>
+				<ScrollToTop>
+					<Switch>
+						<Route exact path='/'>
+							<Homepage />
+						</Route>
+						<Route exact path='/admin'>
+							<Admin />
+						</Route>
+						<Route exact path='/admin/create-project'>
+							<CreateProject />
+						</Route>
+						<Route exact path='/admin/projects/:slug'>
+							<EditProject />
+						</Route>
+						<Route path='*'>
+							<Errorpage />
+						</Route>
+					</Switch>
+				</ScrollToTop>
 			</Router>
 		</>
 	);
