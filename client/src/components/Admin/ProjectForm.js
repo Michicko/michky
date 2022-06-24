@@ -21,6 +21,7 @@ const ProjectForm = ({
 		uploadImage,
 		createProject,
 		deleteImageFromCloud,
+		clearForm,
 	} = useProjectsContext();
 
 	const handleSave = async (e) => {
@@ -50,6 +51,9 @@ const ProjectForm = ({
 			setOldForm(tempForm);
 			setForm(tempForm);
 			setProjectImage(project.image);
+		} else if (type === 'create') {
+			setProjectImage(null);
+			clearForm(formContainer.current);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type, project]);
@@ -92,29 +96,33 @@ const ProjectForm = ({
 						{/* delete */}
 						<AiOutlineClose
 							className='project-icon del-img'
-							onClick={() => deleteImageFromCloud(projectImage.cloudinary_id, project._id)}
+							onClick={() =>
+								deleteImageFromCloud(projectImage.cloudinary_id, project._id)
+							}
 						/>
 					</div>
 				)}
-				<div className='upload-container'>
-					<div className='fileUploadInput'>
-						<label className='form-label'>Upload Image</label>
-						<input
-							type='file'
-							id='image'
-							name='image'
-							accept='image/*'
-							required
-							onChange={handleOnchange}
-						/>
-						<button>
-							<AiOutlinePlus type='button' className='project-icon' />
+				{!projectImage && (
+					<div className='upload-container'>
+						<div className='fileUploadInput'>
+							<label className='form-label'>Upload Image</label>
+							<input
+								type='file'
+								id='image'
+								name='image'
+								accept='image/*'
+								required
+								onChange={handleOnchange}
+							/>
+							<button>
+								<AiOutlinePlus type='button' className='project-icon' />
+							</button>
+						</div>
+						<button type='button' className='upload-btn' onClick={uploadImage}>
+							Upload Image
 						</button>
 					</div>
-					<button type='button' className='upload-btn' onClick={uploadImage}>
-						Upload Image
-					</button>
-				</div>
+				)}
 			</div>
 
 			<textarea

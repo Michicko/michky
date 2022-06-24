@@ -273,6 +273,7 @@ export const ProjectsProvider = ({ children }) => {
 				uploadImage,
 				createProject,
 				deleteImageFromCloud,
+				clearForm,
 			}}
 		>
 			{children}
