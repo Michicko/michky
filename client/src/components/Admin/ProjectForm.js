@@ -38,11 +38,7 @@ const ProjectForm = ({
 			updateBtn.current.disabled = true;
 		}
 	};
-
-	useEffect(() => {
-		console.log("project: ", project);
-	}, [project])
-
+	
 	useEffect(() => {
 		if (type === "edit" && project) {
 			const tempForm = {

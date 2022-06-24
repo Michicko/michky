@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import reducer from '../reducers/projects_reducer';
 import axios from "axios";
-// import handleRequest from '../hooks/useAxios';
 import { CLEAR_FORM, CREATE_PROJECT, DELETE_PROJECT, DELETE_PROJECT_IMAGE, GET_PROJECTS_BEGINS, GET_PROJECTS_ERROR, GET_PROJECTS_SUCCESS, HIDE_ALERT, SET_FORM, SET_PROJECT_IMAGE, SHOW_ALERT, UPDATE_FORM, UPDATE_PROJECT } from '../Actions';
 import { compareObj } from '../utils/compareObj';
 
