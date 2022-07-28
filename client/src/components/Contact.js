@@ -10,10 +10,8 @@ const Contact = () => {
         </div>
         <div className="img-section">
           <div className="contact-art">
-            
           </div>
           <div className="contact-art-2">
-            
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ const cloudinary = require("cloudinary").v2;
 require("dotenv").config({ path: "./config.env" });
 const slugify = require("slugify");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 const fs = require("fs");
 
 cloudinary.config({
@@ -34,11 +35,8 @@ exports.uploadImageToCloud = catchAsync(async (req, res, next) => {
 	const imagePath = req.file.path;
 	const result = await cloudinaryUploader(imagePath, id);
 	const data = createObjData(result.secure_url, result.public_id);
-	// asign image to req.body.image
-	// req.body.image = data;
 	// remove temp image from disk
 	removeTempImg(imagePath);
-	// next();
 	res.status(201).json({
 		status: "success",
 		data,
@@ -48,7 +46,10 @@ exports.uploadImageToCloud = catchAsync(async (req, res, next) => {
 exports.deleteCloudImage = catchAsync(async (req, res, next) => {
 	const id = req.cloudinary_id;
 	await cloudinary.uploader.destroy(id, function (error, result) {
-		console.log(result, error);
+		if (error) {
+			console.log(error);
+			return next(new AppError('Something went wrong, try again!!', 500));
+		}
 	});
 
 	res.status(204).json({

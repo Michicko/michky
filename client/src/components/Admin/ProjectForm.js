@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { useProjectsContext } from "../../contexts/projects_context";
 
-const ProjectForm = ({
-	type,
-	project,
-}) => {
+const ProjectForm = ({ type, project }) => {
 	const createBtn = useRef(null);
 	const updateBtn = useRef(null);
 	const formContainer = useRef(null);
 	const [oldForm, setOldForm] = useState({});
-
+	const [techStack, setTechStack] = useState("");
 	const {
 		handleOnchange,
 		updateProject,
@@ -21,8 +18,25 @@ const ProjectForm = ({
 		uploadImage,
 		createProject,
 		deleteImageFromCloud,
+		deleteImageFromDb,
 		clearForm,
+		techStacks,
+		addStack,
+		removeStack,
+		setStacks,
 	} = useProjectsContext();
+
+	const handleOnStackChange = (e) => {
+		const text = e.target.value.toLowerCase();
+		setTechStack(text);
+	};
+
+	const handleAddStack = () => {
+		if (techStack) {
+			addStack(techStack);
+		}
+		setTechStack("");
+	};
 
 	const handleSave = async (e) => {
 		e.preventDefault();
@@ -30,6 +44,11 @@ const ProjectForm = ({
 			await createProject(formContainer.current, createBtn.current);
 		}
 	};
+
+	const handleDeleteProjectImage = async (cloud_id, project_id) => {
+		await deleteImageFromCloud(cloud_id, project_id);
+		await deleteImageFromDb(project_id);
+	}
 
 	// update project
 	const handleUpdate = async (e) => {
@@ -39,7 +58,7 @@ const ProjectForm = ({
 			updateBtn.current.disabled = true;
 		}
 	};
-	
+
 	useEffect(() => {
 		if (type === "edit" && project) {
 			const tempForm = {
@@ -47,15 +66,18 @@ const ProjectForm = ({
 				link: project.link,
 				image: project.image,
 				description: project.description,
+				stacks: project.stacks
 			};
 			setOldForm(tempForm);
 			setForm(tempForm);
 			setProjectImage(project.image);
-		} else if (type === 'create') {
+			setStacks(project.stacks)
+		} else if (type === "create") {
 			setProjectImage(null);
+			setStacks([]);
 			clearForm(formContainer.current);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type, project]);
 
 	return (
@@ -97,7 +119,10 @@ const ProjectForm = ({
 						<AiOutlineClose
 							className='project-icon del-img'
 							onClick={() =>
-								deleteImageFromCloud(projectImage.cloudinary_id, project._id)
+								handleDeleteProjectImage(
+									projectImage.cloudinary_id,
+									project._id
+								)
 							}
 						/>
 					</div>
@@ -124,7 +149,38 @@ const ProjectForm = ({
 					</div>
 				)}
 			</div>
-
+			{/* add stack */}
+			<div className='stack-box'>
+				<div className='stack-input'>
+					<input
+						type='text'
+						name='stack'
+						placeholder='Enter stack'
+						className='form-text-input'
+						id='stack'
+						// required
+						value={techStack}
+						onChange={handleOnStackChange}
+					/>
+					<button type='button' className='upload-btn' onClick={handleAddStack}>
+						Add stack
+					</button>
+				</div>
+				<div className='stack-display'>
+					{techStacks &&
+						techStacks.map((stack, i) => {
+							return (
+								<div className='stack' key={i}>
+									<p className='stack-item'>{stack}</p>
+									<AiOutlineClose
+										className='remove_stack'
+										onClick={() => removeStack(stack)}
+									/>
+								</div>
+							);
+						})}
+				</div>
+			</div>
 			<textarea
 				name='description'
 				id='description'

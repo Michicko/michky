@@ -15,12 +15,13 @@ exports.getProjects = catchAsync(async (req, res, next) => {
 });
 
 exports.createProject = catchAsync(async (req, res, next) => {
-	const { name, image, link, description, slug } = req.body;
+	const { name, image, link, description,stacks, slug } = req.body;
 	const project = await Project.create({
 		name,
 		image,
 		link,
 		description,
+		stacks,
 		slug
 	});
 
@@ -75,7 +76,6 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 
 exports.getCloudinaryId = catchAsync(async (req, res, next) => {
 	const id = req.body.public_id;
-	console.log(req.body);
 	req.cloudinary_id = id;
 	next();
 })

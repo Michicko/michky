@@ -165,17 +165,57 @@
 	object-fit: cover;
 }
 
-.upload-container {
+.upload-container, .stack-input {
 	display: flex;
 	width: 100%;
 	/* align-items: center; */
 }
 
-.upload-container > *:first-child {
+.stack-input{
+	margin-bottom: 1rem;
+}
+
+.stack-box .stack-display{
+	display: flex;
+	flex-wrap: wrap;
+} 
+
+.stack-display .stack{
+	display: flex;
+	align-items: center;
+} 
+
+.stack p{
+	font-size: 1.5rem;
+	color: var(--darkie);
+	font-weight: 400;
+}
+
+.stack .remove_stack{
+	height: 1.8rem;
+	width: 1.8rem;
+	color: var(--danger);
+	cursor: pointer;
+}
+
+.stack-display .stack>*:first-child{
+	margin-right: 1rem;
+}
+
+.stack-box .stack-display>*:not(:last-child){
+	margin-right: 1.5rem;
+}
+
+.upload-container > *:first-child, .stack-input > *:first-child{
 	margin-right: auto;
 }
 
-.upload-container > *:last-child {
+.stack-input input{
+	max-width: 35rem;
+	width: 100%;
+}
+
+.upload-container > *:last-child{
 	align-self: end;
 }
 
@@ -200,6 +240,11 @@
 	.fileUploadInput input {
 		min-width: 26rem;
 	}
+
+.stack-input input{
+	max-width: 26rem;
+}
+
 }
 
 @media only screen and (max-width: 35.25rem) {
@@ -209,6 +254,10 @@
 
 .fileUploadInput {
 	width: 100%;
+}
+
+.stack-input input{
+	max-width: 20rem;
 }
 
 .upload-container > *:last-child {
@@ -225,6 +274,11 @@
 	.page-container {
 		padding: 4rem;
 	}
+
+	
+.stack-input input{
+	max-width: 16rem;
+}
 
 
 }

@@ -12,6 +12,9 @@ import {
 	SHOW_ALERT,
 	UPDATE_FORM,
 	UPDATE_PROJECT,
+	ADD_STACK,
+	REMOVE_STACK,
+	SET_STACKS
 } from "../Actions";
 
 const ProjectsReducer = (state, action) => {
@@ -62,7 +65,7 @@ const ProjectsReducer = (state, action) => {
 	if (action.type === CLEAR_FORM) {
 		return {
 			...state,
-			form: { name: "", link: "", image: null, description: "" },
+			form: { name: "", link: "", image: null, description: "", stacks: [] },
 		};
 	}
 
@@ -80,6 +83,7 @@ const ProjectsReducer = (state, action) => {
 				link: form.link,
 				image: form.image,
 				description: form.description,
+				stacks: form.stacks
 			},
 		};
 	}
@@ -99,7 +103,22 @@ const ProjectsReducer = (state, action) => {
   if (action.type === CREATE_PROJECT) {
     const project = action.payload;
     return { ...state, projects: [...state.projects, project] };
-  }
+	}
+	
+	if (action.type === ADD_STACK) {
+		const text = action.payload;
+		return {...state, techStacks: [...state.techStacks, text]}
+	}
+
+	if (action.type === REMOVE_STACK) {
+		const text = action.payload;
+		const tempStacks = state.techStacks.filter((stck) => stck !== text)
+		return {...state, techStacks: tempStacks}
+	}
+	if (action.type === SET_STACKS) {
+		const stacks = action.payload;
+		return {...state, techStacks: stacks}
+	}
 
 	return `No matching action ${action.type} type`;
 };

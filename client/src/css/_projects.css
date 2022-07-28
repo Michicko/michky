@@ -18,6 +18,27 @@
 	margin-bottom: 6rem;
 }
 
+.project-stacks{
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 2rem;
+}
+
+.project-stacks>*:not(:last-child){
+	margin-right: 1.5rem;
+}
+
+.project-stack{
+	font-size: 1.3rem;
+	font-weight: 400;
+	color: var(--darkie);
+	display: inline-block;
+}
+
+.project-stack::first-letter{
+	text-transform: uppercase;
+}
+
 .project {
 	width: 100%;
 	display: grid;

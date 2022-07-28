@@ -1,13 +1,12 @@
-import { FiExternalLink } from 'react-icons/fi';
-import { useProjectsContext } from '../contexts/projects_context';
+import { FiExternalLink } from "react-icons/fi";
+import { useProjectsContext } from "../contexts/projects_context";
 const Projects = () => {
-
 	const { projects } = useProjectsContext();
 
 	const projectList =
 		projects.length > 0 ? (
 			projects.map((project, i) => {
-				const { name, image, link, description } = project;
+				const { name, image, link, description, stacks } = project;
 				return (
 					<li
 						className={i % 2 === 0 ? "project img-right" : "project img-left"}
@@ -16,6 +15,16 @@ const Projects = () => {
 						<div className='text-box'>
 							<h4 className='project-name'>{name}</h4>
 							<p className='project-text'>{description}</p>
+							<div className='project-stacks'>
+								{stacks &&
+									stacks.map((stack, i) => {
+										return (
+											<span className='project-stack' key={i}>
+												{stack}
+											</span>
+										);
+									})}
+							</div>
 							<a
 								href={link}
 								target='_blank'
@@ -42,7 +51,6 @@ const Projects = () => {
 			<p className='nothing'>No projects available at the moment.</p>
 		);
 
-
 	return (
 		<section className='projects-section' id='projects'>
 			<h1 className='primary-heading projects-heading'>
@@ -50,9 +58,7 @@ const Projects = () => {
 				<span className='sub'> Works</span>
 			</h1>
 			<div className='projects-content'>
-				<ul className='projects'>
-					{projectList}
-				</ul>
+				<ul className='projects'>{projectList}</ul>
 			</div>
 		</section>
 	);

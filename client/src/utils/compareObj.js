@@ -11,18 +11,17 @@
 	};
 
 	// compare old and new form and create an update
-	export const compareObj = (obj1, obj2, obj = Object.create(null)) => {
-		const obj1Keys = getObjKeys(obj1);
+	export const compareObj = (oldObj, newObj, obj = Object.create(null)) => {
+		const oldObjKeys = getObjKeys(oldObj);
 
-		obj1Keys.forEach((key) => {
-			if (isObject(obj1) && isObject(obj2)) {
-				if (obj1[key] !== obj2[key]) {
-					obj[key] = obj2[key];
+		oldObjKeys.forEach((key) => {
+			if (isObject(oldObj) && isObject(newObj)) {
+				if (oldObj[key] !== newObj[key]) {
+					obj[key] = newObj[key];
 				} else {
-					compareObj(obj1[key], obj2[key], obj);
+					compareObj(oldObj[key], newObj[key], obj);
 				}
 			}
 		});
-
 		return obj;
 	};

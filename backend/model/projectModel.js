@@ -19,6 +19,10 @@ const projectSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "A project must have a description"],
 	},
+	stacks: {
+		type: [String],
+		required: [true, "A project must have stacks"],
+	},
 	slug: {
 		type: String
 	}

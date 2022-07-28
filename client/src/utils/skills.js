@@ -4,6 +4,7 @@ const skills = [
   "sass",
   "javascript",
   "reactJs",
+  "nextJs",
   "nodeJs",
   "python",
   "expressJs",

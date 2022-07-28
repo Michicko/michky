@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import reducer from '../reducers/projects_reducer';
 import axios from "axios";
-import { CLEAR_FORM, CREATE_PROJECT, DELETE_PROJECT, DELETE_PROJECT_IMAGE, GET_PROJECTS_BEGINS, GET_PROJECTS_ERROR, GET_PROJECTS_SUCCESS, HIDE_ALERT, SET_FORM, SET_PROJECT_IMAGE, SHOW_ALERT, UPDATE_FORM, UPDATE_PROJECT } from '../Actions';
+import { CLEAR_FORM, CREATE_PROJECT, DELETE_PROJECT, DELETE_PROJECT_IMAGE, GET_PROJECTS_BEGINS, GET_PROJECTS_ERROR, GET_PROJECTS_SUCCESS, HIDE_ALERT, SET_FORM, SET_PROJECT_IMAGE, SHOW_ALERT, UPDATE_FORM, UPDATE_PROJECT, ADD_STACK, REMOVE_STACK, SET_STACKS } from '../Actions';
 import { compareObj } from '../utils/compareObj';
 
 const ProjectsContext = createContext();
@@ -18,8 +18,10 @@ const initialState = {
 		link: "",
 		image: null,
 		description: "",
+		stacks: []
 	},
 	projectImage: null,
+	techStacks: []
 };
 
 export const ProjectsProvider = ({ children }) => {
@@ -51,6 +53,7 @@ export const ProjectsProvider = ({ children }) => {
 			}
 		};
 
+	// clear form
 	const clearForm = (form) => {
 		dispatch({ type: CLEAR_FORM });
 		form.reset();
@@ -130,6 +133,20 @@ export const ProjectsProvider = ({ children }) => {
     dispatch({ type: CREATE_PROJECT, payload: project})
 	};
 
+	// add stack to state
+	const addStack = (stack) => {
+		dispatch({ type: ADD_STACK, payload: stack });
+	}
+	// remove stack from state
+	const removeStack = (stack) => {
+		dispatch({ type: REMOVE_STACK, payload: stack });
+	}
+
+	// set stacks 
+	const setStacks = (stacks) => {
+		dispatch({ type: SET_STACKS, payload: stacks });
+	}
+
   // ============================
 	// create new project
   // ============================
@@ -144,6 +161,7 @@ export const ProjectsProvider = ({ children }) => {
 				link: state.form.link,
 				image: state.projectImage,
 				description: state.form.description,
+				stacks: state.techStacks,
 			},
 			false
 		);
@@ -154,6 +172,7 @@ export const ProjectsProvider = ({ children }) => {
 			addProjectToDom(project);
 			clearForm(form);
 			setProjectImage(null);
+			setStacks([]);
 			btn.disabled = false;
 		}
 	};
@@ -172,6 +191,7 @@ export const ProjectsProvider = ({ children }) => {
 				link: newForm.link,
 				image: state.projectImage,
 				description: newForm.description,
+				stacks: state.techStacks
 			},
 			false
 		);
@@ -218,7 +238,6 @@ export const ProjectsProvider = ({ children }) => {
 		);
 
     const res = await handleRequest(config);
-    const res2 = await deleteImageFromDb(project_id);
     if (res) {
       deleteImageFromDom(cloudinary_id);
       setProjectImage(null);
@@ -273,7 +292,11 @@ export const ProjectsProvider = ({ children }) => {
 				uploadImage,
 				createProject,
 				deleteImageFromCloud,
+				deleteImageFromDb,
 				clearForm,
+				addStack,
+				removeStack,
+				setStacks,
 			}}
 		>
 			{children}
