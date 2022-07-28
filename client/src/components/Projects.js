@@ -21,6 +21,7 @@ const Projects = () => {
 										return (
 											<span className='project-stack' key={i}>
 												{stack}
+												{`${i < stacks.length - 1 ? "," : ''}`}
 											</span>
 										);
 									})}
