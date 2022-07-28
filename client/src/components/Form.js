@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-const Form = () => {
+const Form = ({ setAlertMessage }) => {
+	const btn = useRef(null);
 	const [contactForm, setContactForm] = useState({
 		name: "",
 		email: "",
@@ -10,13 +11,30 @@ const Form = () => {
 	const handleOnChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
-
 		setContactForm((values) => ({ ...values, [name]: value }));
 	};
 
-	const handleOnsubmit = (e) => {
+	const handleOnsubmit = async (e) => {
+		btn.current.disabled = true;
 		e.preventDefault();
-		console.log(contactForm);
+		const res = await fetch("http://127.0.0.1:8000/api/v1/contacts", {
+			method: "POST",
+			headers: {
+				Accept: "application/json, text/plain, */*",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(contactForm),
+		});
+		const data = await res.json();
+		if (data.status === "success") {
+			setAlertMessage(data.message);
+			setContactForm({
+				name: "",
+				email: "",
+				message: "",
+			});
+		}
+		btn.current.disabled = false;
 	};
 
 	return (
@@ -52,7 +70,7 @@ const Form = () => {
 				value={contactForm.message}
 				onChange={handleOnChange}
 			></textarea>
-			<button className='form-btn' type='submit'>
+			<button className='form-btn' type='submit' ref={btn}>
 				Send message
 			</button>
 		</form>

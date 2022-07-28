@@ -1,8 +1,25 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
-import reducer from '../reducers/projects_reducer';
+import { createContext, useContext, useEffect, useReducer } from "react";
+import reducer from "../reducers/projects_reducer";
 import axios from "axios";
-import { CLEAR_FORM, CREATE_PROJECT, DELETE_PROJECT, DELETE_PROJECT_IMAGE, GET_PROJECTS_BEGINS, GET_PROJECTS_ERROR, GET_PROJECTS_SUCCESS, HIDE_ALERT, SET_FORM, SET_PROJECT_IMAGE, SHOW_ALERT, UPDATE_FORM, UPDATE_PROJECT, ADD_STACK, REMOVE_STACK, SET_STACKS } from '../Actions';
-import { compareObj } from '../utils/compareObj';
+import {
+	CLEAR_FORM,
+	CREATE_PROJECT,
+	DELETE_PROJECT,
+	DELETE_PROJECT_IMAGE,
+	GET_PROJECTS_BEGINS,
+	GET_PROJECTS_ERROR,
+	GET_PROJECTS_SUCCESS,
+	HIDE_ALERT,
+	SET_FORM,
+	SET_PROJECT_IMAGE,
+	SHOW_ALERT,
+	UPDATE_FORM,
+	UPDATE_PROJECT,
+	ADD_STACK,
+	REMOVE_STACK,
+	SET_STACKS,
+} from "../Actions";
+import { compareObj } from "../utils/compareObj";
 
 const ProjectsContext = createContext();
 
@@ -18,40 +35,40 @@ const initialState = {
 		link: "",
 		image: null,
 		description: "",
-		stacks: []
+		stacks: [],
 	},
 	projectImage: null,
-	techStacks: []
+	techStacks: [],
 };
 
 export const ProjectsProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState); 
-  
-  const handleRequest = async (config) => {
+	const [state, dispatch] = useReducer(reducer, initialState);
+
+	const handleRequest = async (config) => {
 		const content = config.multi
 			? { "Content-Type": "multipart/form-data" }
 			: "";
-			try {
-				const res = await axios({
-					method: config.method,
-					url: config.url,
-					data: config.data,
-					headers: content,
-				});
-        return res;
-      } catch (error) {
-				if (error.response) {
-					displayAlert("error", error.response.data.message);
-					console.log(error);
-				} else if (error.request) {
-					console.log(error.request);
-				} else {
-					console.log(error);
-					console.log("Error", error.message);
-					displayAlert("error", error.message);
-				}
+		try {
+			const res = await axios({
+				method: config.method,
+				url: config.url,
+				data: config.data,
+				headers: content,
+			});
+			return res;
+		} catch (error) {
+			if (error.response) {
+				displayAlert("error", error.response.data.message);
+				console.log(error);
+			} else if (error.request) {
+				console.log(error.request);
+			} else {
+				console.log(error);
+				console.log("Error", error.message);
+				displayAlert("error", error.message);
 			}
-		};
+		}
+	};
 
 	// clear form
 	const clearForm = (form) => {
@@ -129,30 +146,30 @@ export const ProjectsProvider = ({ children }) => {
 	};
 
 	// add new project to dom projects
-  const addProjectToDom = (project) => {
-    dispatch({ type: CREATE_PROJECT, payload: project})
+	const addProjectToDom = (project) => {
+		dispatch({ type: CREATE_PROJECT, payload: project });
 	};
 
 	// add stack to state
 	const addStack = (stack) => {
 		dispatch({ type: ADD_STACK, payload: stack });
-	}
+	};
 	// remove stack from state
 	const removeStack = (stack) => {
 		dispatch({ type: REMOVE_STACK, payload: stack });
-	}
+	};
 
-	// set stacks 
+	// set stacks
 	const setStacks = (stacks) => {
 		dispatch({ type: SET_STACKS, payload: stacks });
-	}
+	};
 
-  // ============================
+	// ============================
 	// create new project
-  // ============================
+	// ============================
 	const createProject = async (form, btn) => {
 		// disable btn
-	  btn.disabled = true;
+		btn.disabled = true;
 		const config = createConfig(
 			"POST",
 			"http://127.0.0.1:8000/api/v1/projects",
@@ -173,15 +190,15 @@ export const ProjectsProvider = ({ children }) => {
 			clearForm(form);
 			setProjectImage(null);
 			setStacks([]);
-			btn.disabled = false;
 		}
+		btn.disabled = false;
 	};
 
-  // =============================
+	// =============================
 	// update project
-  // =============================
-  const updateProject = async (project_id, oldForm, btn) => {
-    btn.disabled = true;
+	// =============================
+	const updateProject = async (project_id, oldForm, btn) => {
+		btn.disabled = true;
 		const newForm = compareObj(oldForm, state.form);
 		const config = createConfig(
 			"PATCH",
@@ -191,7 +208,7 @@ export const ProjectsProvider = ({ children }) => {
 				link: newForm.link,
 				image: state.projectImage,
 				description: newForm.description,
-				stacks: state.techStacks
+				stacks: state.techStacks,
 			},
 			false
 		);
@@ -201,8 +218,8 @@ export const ProjectsProvider = ({ children }) => {
 			const project = res.data.data.project;
 			updateProjectOnDom(project);
 			setProjectImage(project.image);
-			btn.disabled = false;
 		}
+		btn.disabled = false;
 	};
 
 	// delete project from Dom : state
@@ -215,9 +232,9 @@ export const ProjectsProvider = ({ children }) => {
 		dispatch({ type: DELETE_PROJECT_IMAGE, payload: cloudinary_id });
 	};
 
-  // delete image from database
-  const deleteImageFromDb = async (project_id) => {
-    const config = createConfig(
+	// delete image from database
+	const deleteImageFromDb = async (project_id) => {
+		const config = createConfig(
 			"PATCH",
 			`http://127.0.0.1:8000/api/v1/projects/${project_id}`,
 			{
@@ -226,7 +243,7 @@ export const ProjectsProvider = ({ children }) => {
 			false
 		);
 		const res = await handleRequest(config);
-  }
+	};
 
 	// delete image from cloudinary
 	const deleteImageFromCloud = async (cloudinary_id, project_id) => {
@@ -237,17 +254,17 @@ export const ProjectsProvider = ({ children }) => {
 			false
 		);
 
-    const res = await handleRequest(config);
-    if (res) {
-      deleteImageFromDom(cloudinary_id);
-      setProjectImage(null);
-      displayAlert("success", "Image deleted successfully");
+		const res = await handleRequest(config);
+		if (res) {
+			deleteImageFromDom(cloudinary_id);
+			setProjectImage(null);
+			displayAlert("success", "Image deleted successfully");
 		}
 	};
 
-  // ===============================
+	// ===============================
 	// deleteProject
-  // ===============================
+	// ===============================
 	const deleteProject = async (project_id) => {
 		const config = createConfig(
 			"DELETE",
@@ -275,7 +292,7 @@ export const ProjectsProvider = ({ children }) => {
 		const res = await handleRequest(config);
 		if (res) {
 			displayAlert(true, "success", "Image uploaded successfully");
-      setProjectImage(res.data.data);
+			setProjectImage(res.data.data);
 		}
 	};
 
@@ -302,8 +319,8 @@ export const ProjectsProvider = ({ children }) => {
 			{children}
 		</ProjectsContext.Provider>
 	);
-}
+};
 
 export const useProjectsContext = () => {
-  return useContext(ProjectsContext);
-}
+	return useContext(ProjectsContext);
+};
