@@ -4,7 +4,8 @@
 	"description": "portfolio app for michael",
 	"main": "app.js",
 	"scripts": {
-		"start": "nodemon server.js",
+		"start": "node server.js",
+		"dev": "nodemon server.js",
 		"start:prod": "NODE_ENV=production nodemon server.js",
 		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
