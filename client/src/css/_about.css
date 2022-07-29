@@ -37,11 +37,15 @@
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
-	column-gap: 2rem;
+	/* column-gap: 2rem; */
 	/* flex-direction: column; */
 }
 .about-skills > *:not(:last-child) {
 	margin-bottom: 1rem;
+}
+
+.about-skill:nth-child(odd){
+	margin-right: 2rem;
 }
 
 .about-skill {
