@@ -17,7 +17,7 @@ const Form = ({ setAlertMessage }) => {
 	const handleOnsubmit = async (e) => {
 		btn.current.disabled = true;
 		e.preventDefault();
-		const res = await fetch("http://127.0.0.1:8000/api/v1/contacts", {
+		const res = await fetch("/api/v1/contacts", {
 			method: "POST",
 			headers: {
 				Accept: "application/json, text/plain, */*",

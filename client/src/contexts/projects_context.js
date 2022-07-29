@@ -81,7 +81,7 @@ export const ProjectsProvider = ({ children }) => {
 		const getProjects = async () => {
 			try {
 				dispatch({ type: GET_PROJECTS_BEGINS });
-				const res = await axios.get("http://127.0.0.1:8000/api/v1/projects");
+				const res = await axios.get("/api/v1/projects");
 				let tempProjects = [];
 				if (res.data.status === "success") {
 					tempProjects = res.data.data.projects;
@@ -172,7 +172,7 @@ export const ProjectsProvider = ({ children }) => {
 		btn.disabled = true;
 		const config = createConfig(
 			"POST",
-			"http://127.0.0.1:8000/api/v1/projects",
+			"/api/v1/projects",
 			{
 				name: state.form.name,
 				link: state.form.link,
@@ -202,7 +202,7 @@ export const ProjectsProvider = ({ children }) => {
 		const newForm = compareObj(oldForm, state.form);
 		const config = createConfig(
 			"PATCH",
-			`http://127.0.0.1:8000/api/v1/projects/${project_id}`,
+			`/api/v1/projects/${project_id}`,
 			{
 				name: newForm.name,
 				link: newForm.link,
@@ -236,7 +236,7 @@ export const ProjectsProvider = ({ children }) => {
 	const deleteImageFromDb = async (project_id) => {
 		const config = createConfig(
 			"PATCH",
-			`http://127.0.0.1:8000/api/v1/projects/${project_id}`,
+			`/api/v1/projects/${project_id}`,
 			{
 				image: null,
 			},
@@ -249,7 +249,7 @@ export const ProjectsProvider = ({ children }) => {
 	const deleteImageFromCloud = async (cloudinary_id, project_id) => {
 		const config = createConfig(
 			"POST",
-			"http://127.0.0.1:8000/api/v1/projects/deleteimage",
+			"/api/v1/projects/deleteimage",
 			{ public_id: cloudinary_id },
 			false
 		);
@@ -268,7 +268,7 @@ export const ProjectsProvider = ({ children }) => {
 	const deleteProject = async (project_id) => {
 		const config = createConfig(
 			"DELETE",
-			`http://127.0.0.1:8000/api/v1/projects/${project_id}`,
+			`/api/v1/projects/${project_id}`,
 			{},
 			false
 		);
@@ -285,7 +285,7 @@ export const ProjectsProvider = ({ children }) => {
 	const uploadImage = async () => {
 		const config = createConfig(
 			"POST",
-			"http://127.0.0.1:8000/api/v1/projects/uploadimage",
+			"/api/v1/projects/uploadimage",
 			{ name: state.form.name, image: state.form.image },
 			true
 		);
