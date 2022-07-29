@@ -77,6 +77,16 @@ export const ProjectsProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
+		const timeoutFunc = (dispatchType, dispatchPayload) => {
+			const dispPayload = dispatchPayload ? dispatchPayload : null;
+			let timeout = setTimeout(() => {
+				dispatch({ type: dispatchType, payload: dispPayload });
+			}, 3000);
+
+			return () => {
+				clearTimeout(timeout);
+			}
+		}
 		// Get projects when component mounts
 		const getProjects = async () => {
 			try {
@@ -85,10 +95,12 @@ export const ProjectsProvider = ({ children }) => {
 				let tempProjects = [];
 				if (res.data.status === "success") {
 					tempProjects = res.data.data.projects;
-					dispatch({ type: GET_PROJECTS_SUCCESS, payload: tempProjects });
+					// dispatch({ type: GET_PROJECTS_SUCCESS, payload: tempProjects });
+					timeoutFunc(GET_PROJECTS_SUCCESS, tempProjects);
 				}
 			} catch (error) {
-				dispatch({ type: GET_PROJECTS_ERROR });
+				// dispatch({ type: GET_PROJECTS_ERROR });
+				timeoutFunc(GET_PROJECTS_ERROR);
 			}
 		};
 		getProjects();
