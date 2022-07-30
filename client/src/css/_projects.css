@@ -67,7 +67,6 @@
 .project.img-left .img-box {
 	order: 1;
 	background: var(--blue-1);
-	filter: blur(3px);
 }
 
 .project.img-left .text-box {
@@ -85,7 +84,6 @@
 .project.img-right .img-box {
 	order: 2;
 	background:  var(--blue-1);
-	filter: blur(3px);
 }
 
 .project.img-right .text-box {
