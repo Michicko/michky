@@ -4,10 +4,10 @@ const About = () => {
   return (
 		<>
 			<section className='about-section' id='about'>
-				<h1 className='primary-heading about-heading'>
+				<h2 className='primary-heading about-heading'>
 					<span className='main'>About</span>
 					<span className='sub'> Me</span>
-				</h1>
+				</h2>
 				<div className='about-content'>
 					<div className='about-description'>
 						<p className='about-text'>

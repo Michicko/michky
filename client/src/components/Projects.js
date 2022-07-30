@@ -54,10 +54,10 @@ const Projects = () => {
 
 	return (
 		<section className='projects-section' id='projects'>
-			<h1 className='primary-heading projects-heading'>
+			<h2 className='primary-heading projects-heading'>
 				<span className='main'>My</span>
 				<span className='sub'> Works</span>
-			</h1>
+			</h2>
 			<div className='projects-content'>
 				<ul className='projects'>{projectList}</ul>
 			</div>

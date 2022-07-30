@@ -1,8 +1,8 @@
 const TopbarTitle = ({title}) => {
   return (
-    <h2 className='topbar-title'>
+    <h3 className='topbar-title'>
       {title}
-    </h2>
+    </h3>
    );
 }
  

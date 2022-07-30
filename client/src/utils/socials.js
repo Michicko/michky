@@ -13,7 +13,7 @@ const socials = [
 	},
 	{
 		icon: <RiLinkedinFill className='icon header-icon' />,
-		link: "https://www.linkedin.com/in/solomon-michael-691873187/",
+		link: "https://www.linkedin.com/in/michky81/",
 	},
 ];
 
