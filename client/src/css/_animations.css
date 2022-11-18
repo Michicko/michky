@@ -1,14 +1,24 @@
 @keyframes line-anime {
-  to{
+  to {
     stroke-dashoffset: 0;
   }
 }
 
 @keyframes fill-loader {
-  from{
+  from {
     fill: transparent;
   }
-  to{
+  to {
     fill: var(--dark-color);
+  }
+}
+
+@keyframes spin-right {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-360deg);
   }
 }
