@@ -20,11 +20,11 @@ const Form = ({ setAlertMessage }) => {
     btn.current.disabled = true;
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    headers.append("Origin", "*");
+    // headers.append("Origin", "*");
 
     try {
       const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
-        mode: "cors",
+        // mode: "cors",
         method: "POST",
         headers: headers,
         body: JSON.stringify(contactForm),
