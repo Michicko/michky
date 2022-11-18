@@ -91,7 +91,9 @@ export const ProjectsProvider = ({ children }) => {
     const getProjects = async () => {
       try {
         dispatch({ type: GET_PROJECTS_BEGINS });
-        const res = await axios.get("/api/v1/projects");
+        const res = await axios.get(
+          "https://michky.cyclic.app/api/v1/projects"
+        );
         let tempProjects = [];
         if (res.data.status === "success") {
           tempProjects = res.data.data.projects;
@@ -184,7 +186,7 @@ export const ProjectsProvider = ({ children }) => {
     btn.disabled = true;
     const config = createConfig(
       "POST",
-      "/api/v1/projects",
+      "https://michky.cyclic.app/api/v1/projects",
       {
         name: state.form.name,
         link: state.form.link,
@@ -214,7 +216,7 @@ export const ProjectsProvider = ({ children }) => {
     const newForm = compareObj(oldForm, state.form);
     const config = createConfig(
       "PATCH",
-      `/api/v1/projects/${project_id}`,
+      `https://michky.cyclic.app/api/v1/projects/${project_id}`,
       {
         name: newForm.name,
         link: newForm.link,
@@ -248,7 +250,7 @@ export const ProjectsProvider = ({ children }) => {
   const deleteImageFromDb = async (project_id) => {
     const config = createConfig(
       "PATCH",
-      `/api/v1/projects/${project_id}`,
+      `https://michky.cyclic.app/api/v1/projects/${project_id}`,
       {
         image: null,
       },
@@ -261,7 +263,7 @@ export const ProjectsProvider = ({ children }) => {
   const deleteImageFromCloud = async (cloudinary_id, project_id) => {
     const config = createConfig(
       "POST",
-      "/api/v1/projects/deleteimage",
+      "https://michky.cyclic.app/api/v1/projects/deleteimage",
       { public_id: cloudinary_id },
       false
     );
@@ -280,7 +282,7 @@ export const ProjectsProvider = ({ children }) => {
   const deleteProject = async (project_id) => {
     const config = createConfig(
       "DELETE",
-      `/api/v1/projects/${project_id}`,
+      `https://michky.cyclic.app/api/v1/projects/${project_id}`,
       {},
       false
     );
@@ -297,7 +299,7 @@ export const ProjectsProvider = ({ children }) => {
   const uploadImage = async () => {
     const config = createConfig(
       "POST",
-      "/api/v1/projects/uploadimage",
+      "https://michky.cyclic.app/api/v1/projects/uploadimage",
       { name: state.form.name, image: state.form.image },
       true
     );
