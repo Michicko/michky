@@ -42,7 +42,6 @@ app.use((req, res, next) => {
   // Pass to next layer of middleware
   next();
 });
-// app.use(cors());
 
 // body parser, reading data from the body req.body
 // app.use(cookieParser());
