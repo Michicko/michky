@@ -18,6 +18,7 @@ app.use(
     credentials: true, //access-control-allow-credentials:true
   })
 );
+
 app.use((req, res, next) => {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type,Origin,Accept"
+    "X-Requested-With,content-type,"
   );
 
   // Set to true if you need the website to include cookies in the requests sent
