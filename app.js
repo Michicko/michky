@@ -14,10 +14,11 @@ if (process.env.NODE_ENV === "production") {
 // cors
 // app.use(
 //   cors({
-//     origin: "*",
+//     origin: "https://michky.vercel.app/",
 //     credentials: true, //access-control-allow-credentials:true
 //   })
 // );
+app.use(cors());
 
 // body parser, reading data from the body req.body
 // app.use(cookieParser());
