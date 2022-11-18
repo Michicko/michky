@@ -23,7 +23,7 @@ const Form = ({ setAlertMessage }) => {
     headers.append("Origin", "http://localhost:3000");
     try {
       const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: headers,
         body: JSON.stringify(contactForm),
