@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
 }
 
-cors
+// cors
 app.use(
   cors({
     origin: "http:127.0.0.1:3000",
