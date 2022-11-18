@@ -7,6 +7,7 @@ const Form = ({ setAlertMessage }) => {
     email: "",
     message: "",
   });
+  let headers = new Headers();
 
   const handleOnChange = (e) => {
     const name = e.target.name;
@@ -17,28 +18,31 @@ const Form = ({ setAlertMessage }) => {
   const handleOnsubmit = async (e) => {
     e.preventDefault();
     btn.current.disabled = true;
-    let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
     headers.append("Origin", "http://localhost:3000");
+
     try {
       const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
-        mode: "no-cors",
+        mode: "cors",
         method: "POST",
         headers: headers,
         body: JSON.stringify(contactForm),
       });
+
       const data = await res.json();
+
       if (data.status === "success") {
         setAlertMessage(data.message);
+        btn.current.disabled = false;
         setContactForm({
           name: "",
           email: "",
           message: "",
         });
       }
-      btn.current.disabled = false;
     } catch (err) {
+      btn.current.disabled = false;
       if (err.response) {
         console.log("err", err.response.data.message);
       } else if (err.request) {
@@ -46,7 +50,6 @@ const Form = ({ setAlertMessage }) => {
       } else {
         console.log("err", err.message);
       }
-      btn.current.disabled = false;
     }
   };
 

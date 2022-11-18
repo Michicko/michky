@@ -6,6 +6,10 @@ const globalError = require("./controller/errorControllers");
 
 const app = express();
 
+// Routers
+const projectRouter = require("./routes/projectRoutes");
+const emailRouter = require("./routes/emailRoutes");
+
 // middlewares
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
@@ -19,38 +23,19 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type,"
-  );
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader("Access-Control-Allow-Credentials", true);
-
-  // Pass to next layer of middleware
-  next();
-});
-
 // body parser, reading data from the body req.body
 // app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routers
-const projectRouter = require("./routes/projectRoutes");
-const emailRouter = require("./routes/emailRoutes");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+  // Pass to next layer of middleware
+  next();
+});
 
 // projects routes
 app.use("/api/v1/projects", projectRouter);
