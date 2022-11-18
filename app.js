@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 // cors
 app.use(
   cors({
-    // origin: "http://localhost:3000",
+    origin: "https://michky.vercel.app",
     credentials: true, //access-control-allow-credentials:true
   })
 );
