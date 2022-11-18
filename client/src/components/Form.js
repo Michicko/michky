@@ -20,7 +20,7 @@ const Form = ({ setAlertMessage }) => {
     btn.current.disabled = true;
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    headers.append("Origin", "http://localhost:3000/");
+    headers.append("Origin", "http://localhost:3000");
 
     try {
       const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
