@@ -11,14 +11,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
 }
 
-// cors
-// app.use(
-//   cors({
-//     origin: "https://michky.vercel.app/",
-//     credentials: true, //access-control-allow-credentials:true
-//   })
-// );
-app.use(cors());
+cors
+app.use(
+  cors({
+    origin: "http:127.0.0.1:3000",
+    credentials: true, //access-control-allow-credentials:true
+  })
+);
 
 // body parser, reading data from the body req.body
 // app.use(cookieParser());
