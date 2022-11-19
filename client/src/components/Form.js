@@ -27,7 +27,7 @@ const Form = ({ setAlertMessage }) => {
       const res = await axios({
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
-        // headers,
+        headers,
         data: contactForm,
       });
 
