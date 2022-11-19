@@ -38,6 +38,7 @@ app.use(
     credentials: true,
     origin: "https://michky.vercel.app",
     optionsSuccessStatus: 200,
+    preflightContinue: true,
   })
 );
 
@@ -47,9 +48,6 @@ const emailRouter = require("./routes/emailRoutes");
 
 // projects routes
 app.use("/api/v1/projects", projectRouter);
-
-app.options("/api/v1/contacts", cors());
-
 // email routes
 app.use("/api/v1/contacts", emailRouter);
 
