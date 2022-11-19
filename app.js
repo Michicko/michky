@@ -33,26 +33,22 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ credentials: true, origin: true, exposedHeaders: "*" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://michky.vercel.app",
+    optionsSuccessStatus: 200,
+  })
+);
 
 // Routers
 const projectRouter = require("./routes/projectRoutes");
 const emailRouter = require("./routes/emailRoutes");
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
 // projects routes
 app.use("/api/v1/projects", projectRouter);
+
+app.options("/api/v1/contacts", cors());
 
 // email routes
 app.use("/api/v1/contacts", emailRouter);
