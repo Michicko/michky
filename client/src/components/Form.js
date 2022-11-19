@@ -22,7 +22,7 @@ const Form = ({ setAlertMessage }) => {
     btn.current.disabled = true;
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    headers.append("Origin", "https://michky.vercel.app");
+    headers.append("Access-Control-Allow-Origin", "https://michky.vercel.app");
     try {
       const res = await axios({
         url: "https://michky.cyclic.app/api/v1/contacts",
