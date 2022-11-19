@@ -5,7 +5,7 @@ const cors = require("cors");
 const router = express.Router();
 
 const corsOptions = {
-  origin: true,
+  origin: "https://michky.vercel.app",
   methods: ["POST"],
   credentials: true,
   maxAge: 3600,
