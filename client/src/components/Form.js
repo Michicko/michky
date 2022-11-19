@@ -41,7 +41,7 @@ const Form = ({ setAlertMessage }) => {
       if (err.response && err.response.data) {
         console.log("err", err.response.data.message);
       } else if (err.request) {
-        console.log("err", "Something went wrong, try again later!");
+        console.log(err.message);
       } else {
         console.log("err", err.message);
       }
