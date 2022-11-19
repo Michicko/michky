@@ -25,22 +25,24 @@ if (process.env.NODE_ENV === "production") {
 //     optionsSuccessStatus: 200,
 //   })
 // );
-const issueOptions = {
-  origin: true,
-  methods: ["GET", "POST", "DELETE", "PATCH"],
-  credentials: true,
-  maxAge: 3600,
-};
+// const issueOptions = {
+//   origin: true,
+//   methods: ["GET", "POST", "DELETE", "PATCH"],
+//   credentials: true,
+//   maxAge: 3600,
+// };
 
-app.use(cors(issueOptions));
+// app.use(cors(issueOptions));
 
 // body parser, reading data from the body req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.options("/api/v1/projects", cors());
 // projects routes
 app.use("/api/v1/projects", projectRouter);
 
+app.options("/api/v1/contacts", cors());
 // email routes
 app.use("/api/v1/contacts", emailRouter);
 
