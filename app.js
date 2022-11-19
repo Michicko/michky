@@ -25,9 +25,8 @@ if (process.env.NODE_ENV === "production") {
 //     optionsSuccessStatus: 200,
 //   })
 // );
-const issueOptions = { credentials: false, origin: "*" };
 
-app.use(cors(issueOptions));
+app.use(cors());
 
 // body parser, reading data from the body req.body
 app.use(express.json());
