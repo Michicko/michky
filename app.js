@@ -33,14 +33,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.options("*", (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.send("ok");
-});
-
-app.use((req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-});
+app.use(cors());
 
 // Routers
 const projectRouter = require("./routes/projectRoutes");
