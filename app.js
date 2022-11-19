@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 // );
 
 const corsOptions = {
-  origin: "https://michky.vercel.app",
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
