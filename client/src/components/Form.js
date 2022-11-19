@@ -19,9 +19,9 @@ const Form = ({ setAlertMessage }) => {
   const handleOnsubmit = async (e) => {
     e.preventDefault();
     btn.current.disabled = true;
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    headers.append("Origin", "http://localhost:3000");
+    // headers.append("Content-Type", "application/json");
+    // headers.append("Accept", "application/json");
+    // headers.append("Origin", "http://localhost:3000");
 
     try {
       const res = await axios({
