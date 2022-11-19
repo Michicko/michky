@@ -22,10 +22,6 @@ const Form = ({ setAlertMessage }) => {
       const res = await axios({
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Access-Control-Allow-Origin": "https://michky.vercel.app",
-        },
         data: contactForm,
       });
 
