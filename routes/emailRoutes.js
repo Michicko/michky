@@ -4,8 +4,15 @@ const cors = require("cors");
 
 const router = express.Router();
 
-router.options("/", cors());
-router.post("/", cors(), sendMail);
-// router.route("/", cors()).post(sendMail);
+const corsOptions = {
+  origin: true,
+  methods: ["POST"],
+  credentials: true,
+  maxAge: 3600,
+};
+
+router.options("/", cors(corsOptions));
+// router.route("/").post(sendMail);
+router.post("/", cors(corsOptions), sendMail);
 
 module.exports = router;
