@@ -3,9 +3,9 @@ const { sendMail } = require("../controller/emailControllers");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
+router.route("/", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Credentials", "false");
   res.setHeader("Access-Control-Max-Age", "1800");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader(
