@@ -25,12 +25,7 @@ if (process.env.NODE_ENV === "production") {
 //     optionsSuccessStatus: 200,
 //   })
 // );
-const issueOptions = {
-  origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
+const issueOptions = { credentials: false, origin: "*" };
 
 app.use(cors(issueOptions));
 
