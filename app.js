@@ -15,27 +15,28 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
 }
 
+// const whitelist = ["http://localhost:3000", "https://michky.vercel.app"];
+
 // cors
-app.use(
-  cors({
-    origin: "*",
-    credentials: true, //access-control-allow-credentials:true
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//     credentials: true, //access-control-allow-credentials:true
+//     optionsSuccessStatus: 200,
+//   })
+// );
+const issueOptions = {
+  origin: true,
+  methods: ["GET", "POST", "DELETE", "PATCH"],
+  credentials: true,
+  maxAge: 3600,
+};
+
+app.use(cors(issueOptions));
 
 // body parser, reading data from the body req.body
-// app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-  // Pass to next layer of middleware
-  next();
-});
 
 // projects routes
 app.use("/api/v1/projects", projectRouter);

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import axios from "axios";
 
 const Form = ({ setAlertMessage }) => {
   const btn = useRef(null);
@@ -20,18 +21,17 @@ const Form = ({ setAlertMessage }) => {
     btn.current.disabled = true;
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    // headers.append("Origin", "*");
+    headers.append("Origin", "http://localhost:3000");
 
     try {
-      const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
-        // mode: "cors",
+      const res = await axios({
+        url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
-        headers: headers,
-        body: JSON.stringify(contactForm),
+        // headers,
+        data: contactForm,
       });
 
       const data = await res.json();
-
       if (data.status === "success") {
         setAlertMessage(data.message);
         btn.current.disabled = false;
@@ -43,7 +43,8 @@ const Form = ({ setAlertMessage }) => {
       }
     } catch (err) {
       btn.current.disabled = false;
-      if (err.response) {
+      console.log(err.response);
+      if (err.response && err.response.data) {
         console.log("err", err.response.data.message);
       } else if (err.request) {
         console.log("err", "Something went wrong, try again later!");
