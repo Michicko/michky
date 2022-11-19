@@ -6,10 +6,6 @@ const globalError = require("./controller/errorControllers");
 
 const app = express();
 
-// Routers
-const projectRouter = require("./routes/projectRoutes");
-const emailRouter = require("./routes/emailRoutes");
-
 // middlewares
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
@@ -26,17 +22,29 @@ if (process.env.NODE_ENV === "production") {
 //   })
 // );
 
-const corsOptions = {
-  origin: "https://michky.vercel.app",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: "https://michky.vercel.app",
+//   credentials: true, //access-control-allow-credentials:true
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // body parser, reading data from the body req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.options("*", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.send("ok");
+});
+
+app.use((req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+});
+
+// Routers
+const projectRouter = require("./routes/projectRoutes");
+const emailRouter = require("./routes/emailRoutes");
 
 // projects routes
 app.use("/api/v1/projects", projectRouter);
