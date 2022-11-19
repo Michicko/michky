@@ -35,7 +35,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    credentials: true,
     origin: "https://michky.vercel.app",
     optionsSuccessStatus: 200,
     preflightContinue: true,
