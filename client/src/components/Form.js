@@ -24,6 +24,7 @@ const Form = ({ setAlertMessage }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "https://michky.vercel.app",
         },
         data: contactForm,
       });
