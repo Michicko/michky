@@ -8,7 +8,6 @@ const Form = ({ setAlertMessage }) => {
     email: "",
     message: "",
   });
-  let headers = new Headers();
 
   const handleOnChange = (e) => {
     const name = e.target.name;
@@ -19,23 +18,16 @@ const Form = ({ setAlertMessage }) => {
   const handleOnsubmit = async (e) => {
     e.preventDefault();
     btn.current.disabled = true;
-    // headers.append("Content-Type", "application/json");
-    // headers.append("Accept", "application/json");
-    // headers.append("Origin", "http://localhost:3000");
-
     try {
       const res = await axios({
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
-        // headers,
-        data: {
-          body: contactForm,
-        },
+        data: contactForm,
       });
 
-      const data = await res.json();
-      if (data.status === "success") {
-        setAlertMessage(data.message);
+      const data = await res;
+      if (data.data.status === "success") {
+        setAlertMessage(data.data.message);
         btn.current.disabled = false;
         setContactForm({
           name: "",
@@ -45,7 +37,7 @@ const Form = ({ setAlertMessage }) => {
       }
     } catch (err) {
       btn.current.disabled = false;
-      console.log(err.response);
+      console.log(err);
       if (err.response && err.response.data) {
         console.log("err", err.response.data.message);
       } else if (err.request) {
