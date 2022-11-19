@@ -32,7 +32,7 @@ const issueOptions = {
   optionsSuccessStatus: 204,
 };
 
-// app.use(cors(issueOptions));
+app.use(cors(issueOptions));
 
 // body parser, reading data from the body req.body
 app.use(express.json());
