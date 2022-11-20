@@ -24,8 +24,7 @@ const Form = ({ setAlertMessage }) => {
     headers.append("Accept", "application/json");
     headers.append("Origin", "https://michky.vercel.app");
     try {
-      const res = await fetch({
-        url: "https://michky.cyclic.app/api/v1/contacts",
+      const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
         method: "POST",
         data: contactForm,
         headers,
