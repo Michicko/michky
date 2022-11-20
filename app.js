@@ -14,7 +14,6 @@ app.use(function (req, res, next) {
     "https://zohomail.com",
   ];
   const origin = req.headers.origin;
-  console.log(origin);
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
@@ -24,11 +23,6 @@ app.use(function (req, res, next) {
   );
   res.header("Access-Control-Allow-credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-  next();
-});
-
-app.use(function (req, res, next) {
-  console.log(req.headers.origin);
   next();
 });
 
