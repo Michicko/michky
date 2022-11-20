@@ -26,11 +26,11 @@ app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/contacts", emailRouter);
 
 // render client
-// app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 
 // Not found
 app.all("*", (req, res, next) => {
