@@ -19,7 +19,7 @@ const Form = ({ setAlertMessage }) => {
     e.preventDefault();
     btn.current.disabled = true;
     try {
-      const res = await fetch("http://localhost:8000/api/v1/contacts", {
+      const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
         mode: "cors",
         method: "POST",
         credentials: "same-origin",
