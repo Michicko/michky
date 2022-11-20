@@ -24,7 +24,7 @@ const Form = ({ setAlertMessage }) => {
     headers.append("Accept", "application/json");
     headers.append("Origin", "https://michky.vercel.app");
     try {
-      const res = await axios({
+      const res = await fetch({
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
         data: contactForm,
@@ -32,6 +32,7 @@ const Form = ({ setAlertMessage }) => {
       });
 
       const data = await res;
+      console.log(data);
       if (data.data.status === "success") {
         setAlertMessage(data.data.message);
         btn.current.disabled = false;
