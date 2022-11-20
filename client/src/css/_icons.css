@@ -1,0 +1,14 @@
+.icon{
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  color:var(--darkie);
+}
+
+@media only screen and (max-width:48em) {
+
+  .icon{
+  height: 2rem;
+  width: 2rem;
+}
+}
