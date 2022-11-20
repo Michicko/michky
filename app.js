@@ -26,6 +26,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(function (req, res, next) {
+  console.log(req.headers.origin);
+  next();
+});
+
 // middlewares
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
