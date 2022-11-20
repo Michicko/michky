@@ -18,15 +18,15 @@ const Form = ({ setAlertMessage }) => {
   const handleOnsubmit = async (e) => {
     e.preventDefault();
     btn.current.disabled = true;
+    let headers = new Headers();
+
+    headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
+    headers.append("Origin", "https://michky.vercel.app");
     try {
       const res = await axios({
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "https://michky.vercel.app",
-        },
         data: contactForm,
       });
 
