@@ -18,16 +18,10 @@ const Form = ({ setAlertMessage }) => {
   const handleOnsubmit = async (e) => {
     e.preventDefault();
     btn.current.disabled = true;
-    let headers = new Headers();
-
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    headers.append("Origin", "https://michky.vercel.app");
     try {
       const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
         method: "POST",
         data: contactForm,
-        headers,
       });
 
       const data = await res;

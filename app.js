@@ -41,13 +41,24 @@ app.use(express.urlencoded({ extended: true }));
 //   })
 // );
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://michky.vercel.app");
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "https://michky.vercel.app");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+//   next();
+// });
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://michky.vercel.app",
+      "https://zohomail.com",
+    ],
+    credentials: true,
+  })
+);
 
 // Routers
 const projectRouter = require("./routes/projectRoutes");
