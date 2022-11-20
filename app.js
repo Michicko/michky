@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
   const allowedOrigins = [
     "http://localhost:3000",
-    "http://michky.vercel.app",
+    "https://michky.vercel.app",
     "https://zohomail.com",
   ];
   const origin = req.headers.origin;
