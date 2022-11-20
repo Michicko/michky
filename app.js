@@ -33,13 +33,21 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: "https://michky.vercel.app",
-    optionsSuccessStatus: 200,
-    preflightContinue: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://michky.vercel.app",
+//     optionsSuccessStatus: 200,
+//     preflightContinue: true,
+//   })
+// );
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://michky.vercel.app");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+  next();
+});
 
 // Routers
 const projectRouter = require("./routes/projectRoutes");
