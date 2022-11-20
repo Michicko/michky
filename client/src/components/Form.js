@@ -19,15 +19,19 @@ const Form = ({ setAlertMessage }) => {
     e.preventDefault();
     btn.current.disabled = true;
     try {
-      const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
+      const res = await fetch("http://localhost:8000/api/v1/contacts", {
+        mode: "cors",
         method: "POST",
-        data: contactForm,
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contactForm),
       });
 
-      const data = await res;
-      console.log(data);
-      if (data.data.status === "success") {
-        setAlertMessage(data.data.message);
+      const data = await res.json();
+      if (data.status === "success") {
+        setAlertMessage(data.message);
         btn.current.disabled = false;
         setContactForm({
           name: "",
