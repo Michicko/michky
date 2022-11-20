@@ -28,6 +28,7 @@ const Form = ({ setAlertMessage }) => {
         url: "https://michky.cyclic.app/api/v1/contacts",
         method: "POST",
         data: contactForm,
+        headers,
       });
 
       const data = await res;
