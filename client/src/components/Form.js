@@ -18,7 +18,7 @@ const Form = ({ setAlertMessage }) => {
     e.preventDefault();
     btn.current.disabled = true;
     try {
-      const res = await fetch("/api/v1/contacts", {
+      const res = await fetch("https://michky.cyclic.app/api/v1/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
