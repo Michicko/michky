@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.setHeader("Access-Control-Allow-Origin", "https://michky.netlify.app/");
+  res.setHeader("Access-Control-Allow-Origin", "https://michky.netlify.app");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("access-control-expose-headers", "set-cookie");
   res.setHeader(
@@ -33,7 +33,7 @@ const corsOptions = {
   //To allow requests from client
   // origin: "http://localhost:5173",
   methods: ["GET", "POST", "PATCH", "DELETE"],
-  origin: "https://michky.netlify.app/",
+  origin: "https://michky.netlify.app",
   credentials: true,
   exposedHeaders: ["set-cookie"],
 };
